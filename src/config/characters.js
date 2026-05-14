@@ -9,6 +9,7 @@
 
 export const characters = {
   jellyfish: {
+    name: "Jellyfish",
     hp: 80,
     modules: [
       ["MoveModule", 2],
@@ -17,6 +18,7 @@ export const characters = {
   },
 
   rock: {
+    name: "Rock",
     hp: 110,
     modules: [
       ["AttackModule", 1, 1]
@@ -24,6 +26,7 @@ export const characters = {
   },
 
   man: {
+    name: "Man",
     hp: 100,
     modules: [
       ["MoveModule", 3],
@@ -32,6 +35,7 @@ export const characters = {
   },
 
   monequin: {
+    name: "Monequin",
     hp: Infinity,
     modules: [
       ["MoveModule", 2],
