@@ -1,23 +1,55 @@
-export default [
-  ["Jellyfish", 80, [
-    ["MoveModule", 2],
-    ["AttackModule", 75, 3]
-  ]],
-  
-  ["Rock", 110, [
-    ["AttackModule", 1, 1]
-  ]],
-  
-  ["Man", 100, [
-    ["MoveModule", 3],
-    ["AttackModule", 25, 5],
-  ]],
+/*
+  Person: playerId, name, hp, _maxHp, modules
+  MoveModule: radius
+  AttackModule: attack, radius
+  VampirismModule: blood, radius
+  TeleportModule: cooldown
+  PotionModule: heal, cooldown, radius
+*/
 
-  ["Monequin", Infinity, [
-    ["MoveModule", 2],
-    ["AttackModule", 50, 6],
-    ["TeleportModule", 3],
-    ["PotionModule", 20, 3, 2],
-    ["VampirismModule", 10, 1],
-  ]],
-];
+export const characters = {
+  jellyfish: {
+    hp: 80,
+    modules: [
+      ["MoveModule", 2],
+      ["AttackModule", 75, 3]
+    ],
+  },
+
+  rock: {
+    hp: 110,
+    modules: [
+      ["AttackModule", 1, 1]
+    ],
+  },
+
+  man: {
+    hp: 100,
+    modules: [
+      ["MoveModule", 3],
+      ["AttackModule", 25, 5],
+    ],
+  },
+
+  monequin: {
+    hp: Infinity,
+    modules: [
+      ["MoveModule", 2],
+      ["AttackModule", 50, 6],
+      ["TeleportModule", 3],
+      ["PotionModule", 20, 3, 2],
+      ["VampirismModule", 10, 1],
+    ],
+  },
+};
+
+export const charactersValues = [];
+
+for (const key in characters) {
+  const char = {
+    ...characters[key],
+    key,
+  };
+
+  charactersValues.push(char);
+}

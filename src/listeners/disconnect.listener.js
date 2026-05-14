@@ -1,10 +1,6 @@
-// classes
-import Game from "../classes/Game.js";
+// TODO: not use
 
-export default async function disconnect(socket) {
+export default async function disconnect(io, socket) {
   console.log('-------[disconnected]');
   console.log("id", socket.id);
-
-  Game.removeFromQueue(socket);
-  Game.gameEndByPlayerId(socket, "You won! Opponent lose connection");
 }
