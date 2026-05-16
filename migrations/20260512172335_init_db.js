@@ -53,12 +53,6 @@ export async function up(knex) {
       .inTable("users")
       .onDelete("CASCADE");
   });
-
-  // queue
-  await knex.schema.createTable("queue", (table) => {
-    table.varchar("socket_id", 255).unique();
-    table.timestamp("created_at").defaultTo(knex.fn.now())
-  });
 };
 
 /**
@@ -66,7 +60,6 @@ export async function up(knex) {
  * @returns { Promise<void> }
  */
 export async function down(knex) {
-  await knex.schema.dropTableIfExists("queue");
   await knex.schema.dropTableIfExists("reset_password");
   await knex.schema.dropTableIfExists("email_verifications");
   await knex.schema.dropTableIfExists("auth");

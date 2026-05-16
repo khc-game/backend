@@ -5,14 +5,12 @@ import http from 'http';
 import { Server } from "socket.io"
 import "colors";
 
-// controllers
-import disconnectListener from './listeners/disconnect.listener.js';
-import playListener from './listeners/play.listener.js'
-// import cancelPlayListener from './listeners/cancelPlay.listener.js'
-// import resignListener from './listeners/resign.listener.js'
-// import selectPersonListener from './listeners/selectPerson.listener.js'
-// import selectModuleListener from './listeners/selectModule.listener.js'
-// import useModuleListener from './listeners/useModule.listener.js'
+// routes
+import charactersRouter from './routes/chracter.router.js';
+
+// listeners
+import disconnectListener from './sockets/handlers/disconnect.js';
+import playListener from './sockets/handlers/play.js'
 
 // config
 import socketConfig from './config/socket.js'
@@ -20,12 +18,13 @@ import socketConfig from './config/socket.js'
 const app = express();
 app.use(cors());
 
+app.use("/api/characters", charactersRouter);
+
 const server = http.createServer(app);
 const io = new Server(server, socketConfig);
 
 io.on("connection", async (socket) => {
-  console.log("--------[connect]");
-  console.log("A user connected", socket.id);
+  console.log("[connect]", socket.id);
 
   socket.emit("getUserId", socket.id);
 
