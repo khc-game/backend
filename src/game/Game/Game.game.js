@@ -29,7 +29,7 @@ export default class Game {
     }
 
     // add characters in map
-    this.map[0][4].content = { name: "Name" };
+    
   }
 
   formatForClient() {
