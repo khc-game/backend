@@ -11,6 +11,9 @@ import charactersRouter from './routes/chracter.router.js';
 // listeners
 import disconnectListener from './sockets/handlers/disconnect.js';
 import playListener from './sockets/handlers/play.js'
+import cancelListener from './sockets/handlers/cancel.js'
+import resignListener from './sockets/handlers/resign.js'
+import selectModuleListener from './sockets/handlers/selectModule.js'
 
 // config
 import socketConfig from './config/socket.js'
@@ -36,11 +39,10 @@ io.on("connection", async (socket) => {
 
   socket.on("disconnect", withSocket(disconnectListener));
   socket.on("play", withSocket(playListener));
-  // socket.on("cancelPlay",  withSocket(cancelPlayListener));
-  // socket.on("resign", withSocket(resignListener));
-  // socket.on("selectPerson", withSocket(selectPersonListener));
-  // socket.on("selectModule", withSocket(selectModuleListener));
-  // socket.on("useModule", withSocket(useModuleListener));
+  socket.on("cancel",  withSocket(cancelListener));
+  socket.on("resign", withSocket(resignListener));
+  socket.on("module:select", withSocket(selectModuleListener));
+  // socket.on("module:use", withSocket(useModuleListener));
 });
 
 server.listen(5000, () => {

@@ -15,9 +15,9 @@ export default async function play(io, socket, selectedPersons) {
   const isPlayWhilePlaying = room || (QueueService.waiting && QueueService.waiting[0] === socket.id);
   if (isPlayWhilePlaying) return;
 
-  // if player persons not selected
+  // if player characters not selected
   if (selectedPersons === null) {
-    return socket.emit("message", "Persons is not selected. Select min 1 person");
+    return socket.emit("message", "Persons is not selected. Select min 1 character");
   }
 
   // player send not array
@@ -25,16 +25,16 @@ export default async function play(io, socket, selectedPersons) {
     return socket.emit("message", "Invalid data. Is not array");
   }
 
-  // check persons count
+  // check characters count
   if (selectedPersons.length === 0 || selectedPersons.length > 4) {
-    return socket.emit("message", "Max persons count only can be from 1 to 4");
+    return socket.emit("message", "Max characters count only can be from 1 to 4");
   }
 
-  // check person availability
+  // check character availability
   for (let i = 0; i < selectedPersons.length; ++i) {
-    const person = selectedPersons[i];
-    if (!characters[person]) {
-      return socket.emit("message", `Undefined person: ${person}`);
+    const character = selectedPersons[i];
+    if (!characters[character]) {
+      return socket.emit("message", `Undefined character: ${character}`);
     }
   }
 

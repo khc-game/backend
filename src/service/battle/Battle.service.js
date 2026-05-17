@@ -24,6 +24,13 @@ export default class BattleService {
     return room;
   }
 
+  static getGameBySocketId(socketId) {
+    const room = BattleService.getRoomBySocketId(socketId);
+    if (room) {
+      return BattleService.getGameByRoom(room);
+    }
+  }
+
   static getGameByRoom(room) {
     return BattleService.battles.get(room);
   }
@@ -34,11 +41,13 @@ export default class BattleService {
 
   static closeRoom(room) {
     const game = BattleService.getGameByRoom(room);
-    const p1Id = game.p1[0];
-    const p2Id = game.p2[0];
-
-    BattleService.playerRoom.delete(p1Id);
-    BattleService.playerRoom.delete(p2Id);
-    BattleService.battles.delete(room);
+    if (game) {
+      const p1Id = game.p1[0];
+      const p2Id = game.p2[0];
+  
+      BattleService.playerRoom.delete(p1Id);
+      BattleService.playerRoom.delete(p2Id);
+      BattleService.battles.delete(room);
+    }
   }
 }
