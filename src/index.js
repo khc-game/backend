@@ -14,6 +14,7 @@ import playListener from './sockets/handlers/play.js'
 import cancelListener from './sockets/handlers/cancel.js'
 import resignListener from './sockets/handlers/resign.js'
 import selectModuleListener from './sockets/handlers/selectModule.js'
+import useModuleListener from './sockets/handlers/useModule.js'
 
 // config
 import socketConfig from './config/socket.js'
@@ -42,7 +43,7 @@ io.on("connection", async (socket) => {
   socket.on("cancel",  withSocket(cancelListener));
   socket.on("resign", withSocket(resignListener));
   socket.on("module:select", withSocket(selectModuleListener));
-  // socket.on("module:use", withSocket(useModuleListener));
+  socket.on("module:use", withSocket(useModuleListener));
 });
 
 server.listen(5000, () => {
