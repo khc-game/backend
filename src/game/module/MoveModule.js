@@ -3,7 +3,7 @@ import Module from "./Module.js";
 
 // utils
 import getByRadius from "../../utils/getByRadius.js";
-import findCaUseCollision from "../../utils/findCanUseCollision.js";
+import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
 export default class MoveModule extends Module {
   radius = null;
@@ -13,14 +13,14 @@ export default class MoveModule extends Module {
     this.radius = radius;
   }
 
-  whereCanUse(map, i, j) {
-    return getByRadius(map, i, j, this.radius);
+  whereCanUse(map, fromI, fromJ) {
+    return getByRadius(map, fromI, fromJ, this.radius);
   }
 
   use(map, fromI, fromJ, toI, toJ) {
     const canUseAt = this.whereCanUse(map, fromI, fromJ);
     
-    const changes = findCaUseCollision(canUseAt, toI, toJ, (addChanges) => {
+    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
       const cellData = map[fromI][fromJ].content;
       map[fromI][fromJ].content = null;
       map[toI][toJ].content = cellData;

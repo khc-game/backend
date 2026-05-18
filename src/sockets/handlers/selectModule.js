@@ -15,6 +15,9 @@ export default async function selectModule(io, socket, args) {
   const character = game.getCharByPos(i, j);
   if (!character) return;
 
+  // check character hp
+  if (character.hp === 0) return;
+
   // check character owner
   if (character.playerId !== socket.id) return;
 

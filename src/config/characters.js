@@ -8,23 +8,6 @@
 */
 
 export const characters = {
-  test: {
-    name: "Person",
-    hp: 100,
-    modules: [
-      ["MoveModule", 3],
-    ],
-  },
-
-  test_2: {
-    name: "Chelovek",
-    hp: 200,
-    modules: [
-      ["MoveModule", 1],
-    ],
-  },
-
-  /*
   jellyfish: {
     name: "Jellyfish",
     hp: 80,
@@ -51,6 +34,7 @@ export const characters = {
     ],
   },
 
+  /*
   monequin: {
     name: "Monequin",
     hp: Infinity,

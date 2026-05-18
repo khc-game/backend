@@ -71,4 +71,8 @@ export default class Game {
   getCharByPos(i, j) {
     return this.map[i][j].content;
   }
+
+  toggleTurn() {
+    this.turn = this.turn === this.p1[0] ? this.p2[0] : this.p1[0];
+  }
 }

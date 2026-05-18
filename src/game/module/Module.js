@@ -5,7 +5,7 @@ export default class Module {
     this.title = title;
   }
 
-  select(map, from) {
+  whereCanUse(map, from) {
     throw new Error("Must be implemented");
   }
 

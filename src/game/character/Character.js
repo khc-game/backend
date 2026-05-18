@@ -28,4 +28,11 @@ export default class Character {
       }
     }
   }
+
+  attacked(damage) {
+    this.hp -= damage;
+    if (this.hp < 0) {
+      this.hp = 0;
+    }
+  }
 }

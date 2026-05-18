@@ -1,5 +1,6 @@
 // modules
 import MoveModule from "./MoveModule.js";
+import AttackModule from "./AttackModule.js";
 
 export default class ModuleFactory {
   static create(data) {
@@ -9,31 +10,23 @@ export default class ModuleFactory {
       case "MoveModule": {
         const [radius] = args;
         return new MoveModule(radius);
-        break;
       }
 
       case "AttackModule": {
         const [damage, radius] = args;
-
-        break;
+        return new AttackModule(damage, radius);
       }
 
       case "VampirismModule": {
         const [blood, radius] = args;
-
-        break;
       }
 
       case "TeleportModule": {
         const [cooldown] = args;
-
-        break;
       }
 
       case "PotionModule": {
         const [heal, cooldown, radius] = args;
-
-        break;
       }
     }
   }

@@ -11,6 +11,8 @@ export default function getByRadius(map, i, j, radius) {
   const availableSlots = [];
   let head = 0;
 
+  checked.add(`${i},${j}`);
+
   // skip current position
   for (const [cx, cy] of dist) {
     const nx = i + cx;
@@ -22,15 +24,13 @@ export default function getByRadius(map, i, j, radius) {
     }
   }
 
-  checked.add([i, j]);
-
   // calculate
   while (head < queue.length) {
     const [i, j, radius] = queue[head++];
 
     if (radius < 0) continue;
 
-    if (map[i][j]) {
+    if (map[i] && map[i][j]) {
       const checkingKey = `${i},${j}`;
       if (map[i][j].content || checked.has(checkingKey)) {
         continue;

@@ -19,6 +19,9 @@ export default async function useModule(io, socket, args) {
   const character = game.getCharByPos(fromI, fromJ);
   if (!character) return;
 
+  // check character hp
+  if (character.hp === 0) return;
+
   // check character owner
   if (character.playerId !== socket.id) return;
 
@@ -30,6 +33,9 @@ export default async function useModule(io, socket, args) {
   // calculate
   const changes = module.use(game.map, fromI, fromJ, toI, toJ);
 
+  // change turn
+  game.toggleTurn();
+
   // send changes to client
-  io.to(room).emit("module:mapUpdate", changes);
+  io.to(room).emit("module:mapUpdate", [changes, game.turn]);
 }
