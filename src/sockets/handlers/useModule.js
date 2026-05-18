@@ -4,8 +4,12 @@ import BattleService from "../../service/battle/Battle.service.js";
 export default async function useModule(io, socket, args) {
   const { ind, fromI, fromJ, toI, toJ } = args;
 
+  // find room
+  const room = BattleService.getRoomBySocketId(socket.id);
+  if (!room) return;
+
   // find game
-  const game = BattleService.getGameBySocketId(socket.id);
+  const game = BattleService.getGameByRoom(room);
   if (!game) return;
 
   // check turn
@@ -24,11 +28,8 @@ export default async function useModule(io, socket, args) {
   if (!module) return;
   
   // calculate
-  module.use(game.map, fromI, fromJ, toI, toJ);
+  const changes = module.use(game.map, fromI, fromJ, toI, toJ);
 
-  // TODO: придумать как отправить измененные данные клиенту
-  // Вариант 1: из .use() вернуть позиции всех клеток что изменилось
-  // Вариант 2: основываясь на типе модуля отправить соответствующее сообщение
-
-  // TODO check live characters
+  // send changes to client
+  io.to(room).emit("module:mapUpdate", changes);
 }
