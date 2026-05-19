@@ -1,0 +1,40 @@
+// game
+import Module from "./Module.js";
+
+// utils
+import getPersonsByRadius from "../../utils/getPersonsByRadius.js";
+import findCanUseCollision from "../../utils/findCanUseCollision.js";
+
+export default class VampirismModule extends Module {
+  blood = null;
+  radius = null;
+
+  constructor(blood, radius) {
+    super("Vampirism");
+    this.blood = blood;
+    this.radius = radius;
+  }
+
+  whereCanUse(map, player, fromI, fromJ) {
+    return getPersonsByRadius(map, fromI, fromJ, this.radius);
+  }
+
+  use(map, player, fromI, fromJ, toI, toJ) {
+    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
+    
+    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
+      const opponent = map[toI][toJ].content;
+      const player = map[fromI][fromJ].content;
+      
+      const bloodForPlayer = opponent.hp < this.blood ? opponent.hp : this.blood;
+
+      opponent.attacked(this.blood);
+      player.heal(bloodForPlayer);
+
+      addChanges(fromI, fromJ,  map[fromI][fromJ]);
+      addChanges(toI, toJ, map[toI][toJ]);
+    });
+
+    return changes;
+  }
+}

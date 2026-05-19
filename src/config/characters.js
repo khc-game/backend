@@ -34,19 +34,14 @@ export const characters = {
     ],
   },
 
-  /*
-  monequin: {
-    name: "Monequin",
-    hp: Infinity,
+  vampire: {
+    name: "Vampire",
+    hp: 50,
     modules: [
-      ["MoveModule", 2],
-      ["AttackModule", 50, 6],
-      ["TeleportModule", 3],
-      ["PotionModule", 20, 3, 2],
-      ["VampirismModule", 10, 1],
+      ["MoveModule", 4],
+      ["VampirismModule", 20, 1],
     ],
   },
-  */
 };
 
 export const charactersValues = [];

@@ -35,4 +35,11 @@ export default class Character {
       this.hp = 0;
     }
   }
+
+  heal(amount) {
+    this.hp += amount;
+    if (this.hp > this.maxHP) {
+      this.hp = this.maxHP;
+    }
+  }
 }

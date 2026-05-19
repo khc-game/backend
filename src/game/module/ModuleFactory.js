@@ -1,6 +1,7 @@
 // modules
 import MoveModule from "./MoveModule.js";
 import AttackModule from "./AttackModule.js";
+import VampirismModule from "./VampirismModule.js";
 
 export default class ModuleFactory {
   static create(data) {
@@ -19,6 +20,7 @@ export default class ModuleFactory {
 
       case "VampirismModule": {
         const [blood, radius] = args;
+        return new VampirismModule(blood, radius);
       }
 
       case "TeleportModule": {
