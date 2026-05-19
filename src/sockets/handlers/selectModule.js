@@ -27,7 +27,7 @@ export default async function selectModule(io, socket, args) {
   if (!module) return;
   
   // calculate
-  const canUseAt = module.whereCanUse(game.map, i, j);
+  const canUseAt = module.whereCanUse(game.map, socket.id, i, j);
 
   // send to client
   socket.emit("module:canUseAt", canUseAt);

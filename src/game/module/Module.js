@@ -5,11 +5,11 @@ export default class Module {
     this.title = title;
   }
 
-  whereCanUse(map, from) {
+  whereCanUse(map, player, fromI, fromJ) {
     throw new Error("Must be implemented");
   }
 
-  use(map, from, to) {
+  use(map, player, fromI, fromJ, toI, toJ) {
     throw new Error("Must be implemented");
   }
 }

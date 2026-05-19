@@ -31,7 +31,7 @@ export default async function useModule(io, socket, args) {
   if (!module) return;
   
   // calculate
-  const changes = module.use(game.map, fromI, fromJ, toI, toJ);
+  const changes = module.use(game.map, socket.id, fromI, fromJ, toI, toJ);
 
   // change turn
   game.toggleTurn();

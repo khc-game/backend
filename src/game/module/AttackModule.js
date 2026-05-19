@@ -15,12 +15,12 @@ export default class AttackModule extends Module {
     this.radius = radius;
   }
 
-  whereCanUse(map, fromI, fromJ) {
+  whereCanUse(map, player, fromI, fromJ) {
     return getPersonsByRadius(map, fromI, fromJ, this.radius);
   }
 
-  use(map, fromI, fromJ, toI, toJ) {
-    const canUseAt = this.whereCanUse(map, fromI, fromJ);
+  use(map, player, fromI, fromJ, toI, toJ) {
+    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
     
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
       const cellData = map[fromI][fromJ].content;
