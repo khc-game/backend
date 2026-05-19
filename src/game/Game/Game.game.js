@@ -6,6 +6,7 @@ export default class Game {
   p2 = null;
   turn = null;
   map = null;
+  // TODO: add cooldown for modules
 
   constructor(p1, p2) {
     const [p1SocketId, p1Characters] = p1;

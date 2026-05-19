@@ -2,6 +2,8 @@
 import MoveModule from "./MoveModule.js";
 import AttackModule from "./AttackModule.js";
 import VampirismModule from "./VampirismModule.js";
+import TeleportModule from "./TeleportModule.js";
+import PotionModule from "./PotionModule.js";
 
 export default class ModuleFactory {
   static create(data) {
@@ -25,10 +27,12 @@ export default class ModuleFactory {
 
       case "TeleportModule": {
         const [cooldown] = args;
+        return new TeleportModule(cooldown);
       }
 
       case "PotionModule": {
         const [heal, cooldown, radius] = args;
+        return new PotionModule(heal, cooldown, radius);
       }
     }
   }

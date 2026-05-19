@@ -1,8 +1,10 @@
 export default class Module {
   title = null;
+  cooldown = null;
 
-  constructor(title) {
+  constructor(title, cooldown = null) {
     this.title = title;
+    this.cooldown = cooldown;
   }
 
   whereCanUse(map, player, fromI, fromJ) {

@@ -42,6 +42,25 @@ export const characters = {
       ["VampirismModule", 20, 1],
     ],
   },
+
+  bambrik: {
+    name: "Bambrik",
+    hp: 50,
+    modules: [
+      ["MoveModule", 1],
+      ["TeleportModule", 1],
+    ],
+  },
+
+  honlia: {
+    name: "Honlia",
+    hp: 100,
+    modules: [
+      ["MoveModule", 2],
+      ["AttackModule", 10, 2],
+      ["PotionModule", 10, 3, 2],
+    ],
+  },
 };
 
 export const charactersValues = [];
