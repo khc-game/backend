@@ -29,10 +29,24 @@ export default async function useModule(io, socket, args) {
   const modules = character.modules;
   const module = modules[ind];
   if (!module) return;
-  
+
+  // check cooldown
+  const cooldown = game.cooldown;
+
+  // if cooldown have
+  if (cooldown.has(socket.id, module.title)) return;
+
+  // decrement cooldown 
+  cooldown.countDownForCurrentPlayer(socket.id);
+
+  // set cooldown
+  if (module.cooldown) {
+    cooldown.add(socket.id, module.title, module.cooldown);
+  }
+
   // calculate
   const changes = module.use(game.map, socket.id, fromI, fromJ, toI, toJ);
-
+  
   // change turn
   game.toggleTurn();
 

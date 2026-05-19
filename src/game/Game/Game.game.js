@@ -1,12 +1,13 @@
 // game
 import Character from "../character/Character.js";
+import Cooldown from '../cooldown/Cooldown.js';
 
 export default class Game {
   p1 = null;
   p2 = null;
   turn = null;
   map = null;
-  // TODO: add cooldown for modules
+  cooldown = null;
 
   constructor(p1, p2) {
     const [p1SocketId, p1Characters] = p1;
@@ -15,6 +16,7 @@ export default class Game {
     this.p1 = p1;
     this.p2 = p2;
     this.turn = p1SocketId;
+    this.cooldown = new Cooldown();
     this.#initMap();
   }
 
