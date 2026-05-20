@@ -29,4 +29,8 @@ export default class PotionModule extends Module {
 
     return changes;
   }
+
+  copy() {
+    return new PotionModule(this.heal, this.cooldown, this.radius);
+  }
 }

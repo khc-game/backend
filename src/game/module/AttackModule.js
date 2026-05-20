@@ -31,4 +31,8 @@ export default class AttackModule extends Module {
 
     return changes;
   }
+
+  copy() {
+    return new AttackModule(this.damage, this.radius);
+  }
 }

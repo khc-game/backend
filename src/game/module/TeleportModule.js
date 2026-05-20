@@ -38,4 +38,8 @@ export default class TeleportModule extends Module {
 
     return changes;
   }
+
+  copy() {
+    return new TeleportModule(this.cooldown);
+  }
 }

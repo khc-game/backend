@@ -31,4 +31,8 @@ export default class MoveModule extends Module {
 
     return changes;
   }
+
+  copy() {
+    return new MoveModule(this.radius);
+  }
 }

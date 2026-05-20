@@ -1,6 +1,3 @@
-// game
-import ModuleFactory from "../module/ModuleFactory.js";
-
 // constants
 import { characters } from "../../config/characters.js";
 
@@ -22,12 +19,8 @@ export default class Character {
     this.key = key;
 
     for (let i = 0; i < modules.length; ++i) {
-      const module = ModuleFactory.create(modules[i]);
-      if (module) {
-        this.modules.push(module);
-      } else {
-        console.warn("undefined module");
-      }
+      const module = modules[i].copy();
+      this.modules.push(module);
     }
   }
 

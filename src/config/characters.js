@@ -1,19 +1,21 @@
 /*
   Person: playerId, name, hp, _maxHp, modules
-  MoveModule: radius
-  AttackModule: attack, radius
-  VampirismModule: blood, radius
-  TeleportModule: cooldown
-  PotionModule: heal, cooldown, radius
 */
+
+// game
+import MoveModule from "../game/module/MoveModule.js";
+import AttackModule from "../game/module/AttackModule.js";
+import VampirismModule from "../game/module/VampirismModule.js";
+import TeleportModule from "../game/module/TeleportModule.js";
+import PotionModule from "../game/module/PotionModule.js";
 
 export const characters = {
   jellyfish: {
     name: "Jellyfish",
     hp: 80,
     modules: [
-      ["MoveModule", 2],
-      ["AttackModule", 75, 3]
+      new MoveModule(2),
+      new AttackModule(75, 3),
     ],
   },
 
@@ -21,7 +23,7 @@ export const characters = {
     name: "Rock",
     hp: 110,
     modules: [
-      ["AttackModule", 1, 1]
+      new AttackModule(1, 1),
     ],
   },
 
@@ -29,8 +31,8 @@ export const characters = {
     name: "Vampire",
     hp: 50,
     modules: [
-      ["MoveModule", 4],
-      ["VampirismModule", 20, 1],
+      new MoveModule(4),
+      new VampirismModule(20, 1),
     ],
   },
 
@@ -38,8 +40,8 @@ export const characters = {
     name: "Bambrik",
     hp: 50,
     modules: [
-      ["MoveModule", 1],
-      ["TeleportModule", 1],
+      new MoveModule(1),
+      new TeleportModule(1),
     ],
   },
 
@@ -47,9 +49,9 @@ export const characters = {
     name: "Honlia",
     hp: 100,
     modules: [
-      ["MoveModule", 2],
-      ["AttackModule", 10, 2],
-      ["PotionModule", 10, 3, 2],
+      new MoveModule(2),
+      new AttackModule(10, 2),
+      new PotionModule(10, 3, 2),
     ],
   },
 };

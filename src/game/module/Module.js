@@ -14,4 +14,8 @@ export default class Module {
   use(map, player, fromI, fromJ, toI, toJ) {
     throw new Error("Must be implemented");
   }
+  
+  copy() {
+    throw new Error("Must be implemented");
+  }
 }
