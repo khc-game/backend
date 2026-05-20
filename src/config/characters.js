@@ -12,24 +12,25 @@ import PotionModule from "../game/module/PotionModule.js";
 export const characters = {
   jellyfish: {
     name: "Jellyfish",
-    hp: 80,
+    hp: 100,
     modules: [
-      new MoveModule(2),
+      new MoveModule(3),
       new AttackModule(75, 3),
     ],
   },
 
   rock: {
     name: "Rock",
-    hp: 110,
+    hp: 200,
     modules: [
-      new AttackModule(1, 1),
+      new MoveModule(1),
+      new AttackModule(40, 2),
     ],
   },
 
   vampire: {
     name: "Vampire",
-    hp: 50,
+    hp: 100,
     modules: [
       new MoveModule(4),
       new VampirismModule(20, 1),
@@ -38,9 +39,9 @@ export const characters = {
 
   bambrik: {
     name: "Bambrik",
-    hp: 50,
+    hp: 100,
     modules: [
-      new MoveModule(1),
+      new MoveModule(2),
       new TeleportModule(1),
     ],
   },
