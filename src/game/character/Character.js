@@ -10,6 +10,7 @@ export default class Character {
   maxHP = null;
   playerId = null;
   modules = null;
+  key = null;
 
   constructor(key, playerId) {
     const { hp, name, modules } = characters[key];
@@ -18,6 +19,7 @@ export default class Character {
     this.maxHP = hp;
     this.playerId = playerId;
     this.modules = [];
+    this.key = key;
 
     for (let i = 0; i < modules.length; ++i) {
       const module = ModuleFactory.create(modules[i]);

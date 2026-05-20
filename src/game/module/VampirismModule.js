@@ -26,7 +26,7 @@ export default class VampirismModule extends Module {
       const opponent = map[toI][toJ].content;
       const player = map[fromI][fromJ].content;
       
-      const bloodForPlayer = opponent.hp < this.blood ? opponent.hp : this.blood;
+      const bloodForPlayer = Math.floor((opponent.hp < this.blood ? opponent.hp : this.blood) / 2);
 
       opponent.attacked(this.blood);
       player.heal(bloodForPlayer);

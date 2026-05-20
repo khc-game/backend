@@ -25,15 +25,6 @@ export const characters = {
     ],
   },
 
-  man: {
-    name: "Man",
-    hp: 100,
-    modules: [
-      ["MoveModule", 3],
-      ["AttackModule", 25, 5],
-    ],
-  },
-
   vampire: {
     name: "Vampire",
     hp: 50,
