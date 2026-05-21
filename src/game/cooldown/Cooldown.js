@@ -5,26 +5,20 @@ export default class Cooldown {
     this.cooldowns = {};
   }
 
-  #createKey(socketId, moduleTitle) {
-    return `${socketId}-${moduleTitle}`;
+  add(socketId, moduleId, cooldown) {
+    this.cooldowns[moduleId] = cooldown;
   }
 
-  add(socketId, moduleTitle, cooldown) {
-    const key = this.#createKey(socketId, moduleTitle);
-    this.cooldowns[key] = cooldown;
+  has(socketId, moduleId) {
+    return moduleId in this.cooldowns;
   }
 
-  has(socketId, moduleTitle) {
-    const key = this.#createKey(socketId, moduleTitle);
-    return key in this.cooldowns;
-  }
-
-  countDownForCurrentPlayer(socketId) {
-    for (const key in this.cooldowns) {
-      if (!key.startsWith(socketId)) continue;
+  countDownForCurrentPlayer(moduleId) {
+    for (const id in this.cooldowns) {
+      if (id === moduleId) continue;
       
-      if (--this.cooldowns[key] === 0) {
-        delete this.cooldowns[key];
+      if (--this.cooldowns[id] === 0) {
+        delete this.cooldowns[id];
       }
     }
   }

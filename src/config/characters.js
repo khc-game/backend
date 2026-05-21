@@ -8,6 +8,8 @@ import AttackModule from "../game/module/AttackModule.js";
 import VampirismModule from "../game/module/VampirismModule.js";
 import TeleportModule from "../game/module/TeleportModule.js";
 import PotionModule from "../game/module/PotionModule.js";
+import DivideModule from '../game/module/DivideModule.js';
+import BuffModule from "../game/module/BuffModule.js";
 
 export const characters = {
   jellyfish: {
@@ -42,6 +44,7 @@ export const characters = {
     hp: 100,
     modules: [
       new MoveModule(2),
+      new AttackModule(10, 3),
       new TeleportModule(1),
     ],
   },
@@ -53,6 +56,16 @@ export const characters = {
       new MoveModule(2),
       new AttackModule(10, 2),
       new PotionModule(10, 3, 2),
+    ],
+  },
+
+  amoeba: {
+    name: "Amoeba",
+    hp: 10,
+    modules: [
+      new AttackModule(5, 2),
+      new DivideModule(),
+      new BuffModule(2),
     ],
   },
 };

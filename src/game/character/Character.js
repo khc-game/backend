@@ -37,4 +37,12 @@ export default class Character {
       this.hp = this.maxHP;
     }
   }
+
+  clone() {
+    const clone = new Character(this.key, this.playerId);
+    clone.hp = this.maxHP;
+    clone.maxHP = this.maxHP;
+
+    return clone;
+  }
 }

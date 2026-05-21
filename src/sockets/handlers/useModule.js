@@ -41,7 +41,7 @@ export default async function useModule(io, socket, args) {
 
   // set cooldown
   if (module.cooldown) {
-    cooldown.add(socket.id, module.title, module.cooldown);
+    cooldown.add(socket.id, module.id, module.cooldown);
   }
 
   // calculate
