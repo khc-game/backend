@@ -19,8 +19,6 @@ export default class BuffModule extends Module {
     map[fromI][fromJ].content.hp += 5;
     map[fromI][fromJ].content.maxHP += 5;
 
-    console.log(map[fromI][fromJ].content);
-
     return [[fromI, fromJ, map[fromI][fromJ]]];
   }
 

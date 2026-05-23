@@ -26,16 +26,24 @@ export default async function play(io, socket, selectedPersons) {
   }
 
   // check characters count
-  if (selectedPersons.length === 0 || selectedPersons.length > 4) {
-    return socket.emit("message", "Max characters count only can be from 1 to 4");
+  const maxCharacters = 8;
+  if (selectedPersons.length === 0 || selectedPersons.length > maxCharacters) {
+    return socket.emit("message", "Max characters count only can be from 1 to 8");
   }
 
-  // check character availability
+  // check character availability & cost
+  let totalCost = 0;
   for (let i = 0; i < selectedPersons.length; ++i) {
     const character = selectedPersons[i];
     if (!characters[character]) {
       return socket.emit("message", `Undefined character: ${character}`);
     }
+
+    totalCost += characters[character].cost;
+  }
+
+  if (totalCost > maxCharacters) {
+    return socket.emit("message", `Total cost is biggest than ${maxCharacters}`);
   }
 
   // GAME

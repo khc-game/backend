@@ -12,9 +12,10 @@ import DivideModule from '../game/module/DivideModule.js';
 import BuffModule from "../game/module/BuffModule.js";
 
 export const characters = {
-  jellyfish: {
-    name: "Jellyfish",
+  jellish: {
+    name: "Jellish",
     hp: 100,
+    cost: 1,
     modules: [
       new MoveModule(3),
       new AttackModule(75, 3),
@@ -24,6 +25,8 @@ export const characters = {
   rock: {
     name: "Rock",
     hp: 200,
+    cost: 5,
+
     modules: [
       new MoveModule(1),
       new AttackModule(40, 2),
@@ -33,6 +36,7 @@ export const characters = {
   vampire: {
     name: "Vampire",
     hp: 100,
+    cost: 2,
     modules: [
       new MoveModule(4),
       new VampirismModule(20, 1),
@@ -42,6 +46,7 @@ export const characters = {
   bambrik: {
     name: "Bambrik",
     hp: 100,
+    cost: 2,
     modules: [
       new MoveModule(2),
       new AttackModule(10, 3),
@@ -52,6 +57,7 @@ export const characters = {
   honlia: {
     name: "Honlia",
     hp: 100,
+    cost: 4,
     modules: [
       new MoveModule(2),
       new AttackModule(10, 2),
@@ -62,9 +68,10 @@ export const characters = {
   amoeba: {
     name: "Amoeba",
     hp: 10,
+    cost: 1,
     modules: [
       new AttackModule(5, 2),
-      new DivideModule(),
+      new DivideModule(1),
       new BuffModule(2),
     ],
   },

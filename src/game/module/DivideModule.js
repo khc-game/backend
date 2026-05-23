@@ -6,8 +6,9 @@ import getByRadius from "../../utils/getByRadius.js";
 import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
 export default class DivideModule extends Module {
-  constructor() {
+  constructor(cooldown) {
     super("Divide");
+    this.cooldown = cooldown;
   }
 
   whereCanUse(map, player, fromI, fromJ) {

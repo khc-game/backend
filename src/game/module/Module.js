@@ -2,14 +2,14 @@
 import crypto from 'crypto';
 
 export default class Module {
+  id = null;
   title = null;
   cooldown = null;
-  id = null;
 
   constructor(title, cooldown = null) {
+    this.id = crypto.randomUUID();
     this.title = title;
     this.cooldown = cooldown;
-    this.id = crypto.randomUUID();
   }
 
   whereCanUse(map, player, fromI, fromJ) {
