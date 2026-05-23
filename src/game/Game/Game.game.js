@@ -1,6 +1,7 @@
 // game
 import Character from "../character/Character.js";
 import Cooldown from '../cooldown/Cooldown.js';
+import Timer from "../timer/Timer.js";
 
 export default class Game {
   p1 = null;
@@ -8,6 +9,7 @@ export default class Game {
   turn = null;
   map = null;
   cooldown = null;
+  timer = null;
 
   constructor(p1, p2) {
     const [p1SocketId, p1Characters] = p1;
@@ -18,6 +20,7 @@ export default class Game {
     this.turn = p1SocketId;
     this.cooldown = new Cooldown();
     this.#initMap();
+    this.timer = new Timer(p1SocketId, p2SocketId);
   }
 
   #initMap() {
@@ -77,5 +80,6 @@ export default class Game {
 
   toggleTurn() {
     this.turn = this.turn === this.p1[0] ? this.p2[0] : this.p1[0];
+    this.timer.switch();
   }
 }

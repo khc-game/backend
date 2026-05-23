@@ -51,18 +51,25 @@ export default async function play(io, socket, selectedPersons) {
   if (QueueService.waiting === null) {
     QueueService.add(socket.id, selectedPersons);
   } else {
+    // get enemy
     const enemy = QueueService.waiting;
     const [enemySocketId, enemyCharacters] = enemy;
     QueueService.waiting = null;
 
+    // create room & game
     const room = BattleService.createRoom(enemy, [socket.id, selectedPersons]);
     const game = BattleService.getGameByRoom(room);
+    const timer = game.timer;
 
+    // join players to socket room
     const enemySocket = io.sockets.sockets.get(enemySocketId);
-
     socket.join(room);
     enemySocket.join(room);
+
+    // start timer
+    timer.start();
     
+    // send map to players
     io.to(room).emit("play", game.formatForClient());
   }
 }

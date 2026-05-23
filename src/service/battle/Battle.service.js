@@ -42,6 +42,7 @@ export default class BattleService {
   static closeRoom(room) {
     const game = BattleService.getGameByRoom(room);
     if (game) {
+      game.timer.stop();
       const p1Id = game.p1[0];
       const p2Id = game.p2[0];
   
