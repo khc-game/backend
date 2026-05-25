@@ -7,6 +7,8 @@ import Game from '../../game/game/Game.game.js';
 export default class BattleService {
   static playerRoom = new Map();
   static battles = new Map();
+  static timersByRoom = new Set();
+  static interval = null;
 
   static createRoom(p1, p2) {
     const [p1SocketId, p1Characters] = p1;
@@ -18,8 +20,8 @@ export default class BattleService {
 
     BattleService.playerRoom.set(p1SocketId, room);
     BattleService.playerRoom.set(p2SocketId, room);
-
     BattleService.battles.set(room, game);
+    BattleService.timersByRoom.add(room);
 
     return room;
   }
@@ -42,13 +44,41 @@ export default class BattleService {
   static closeRoom(room) {
     const game = BattleService.getGameByRoom(room);
     if (game) {
-      game.timer.stop();
       const p1Id = game.p1[0];
       const p2Id = game.p2[0];
   
       BattleService.playerRoom.delete(p1Id);
       BattleService.playerRoom.delete(p2Id);
       BattleService.battles.delete(room);
+    }
+  }
+
+  static createInterval(io) {
+    BattleService.interval = setInterval(() => {
+      const timersIterator = BattleService.timersByRoom.values();
+
+      for (const room of timersIterator) {
+        const game = BattleService.getGameByRoom(room);
+        const timer = game.timer;
+        timer.decrease();
+
+        if (timer.currentPlayerTimer.timer < 1) {
+          io.to(room).emit("end:time", { lost: timer.currentPlayerTimer.socketId });
+          BattleService.timersByRoom.delete(room);
+          BattleService.closeRoom(room);
+        }
+      }
+    }, 1000);
+  }
+
+  static deleteInterval() {
+    clearInterval(BattleService.interval);
+    BattleService.interval = null;
+  }
+
+  static checkInterval() {
+    if (BattleService.timersByRoom.size === 0) {
+      BattleService.deleteInterval();
     }
   }
 }

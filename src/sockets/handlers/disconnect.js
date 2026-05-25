@@ -14,5 +14,6 @@ export default async function disconnect(io, socket) {
 
   const game = BattleService.getGameByRoom(room);
   BattleService.closeRoom(room);
+  BattleService.checkInterval();
   socket.to(room).emit("end:leave");
 }

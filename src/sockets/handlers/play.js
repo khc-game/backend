@@ -59,7 +59,6 @@ export default async function play(io, socket, selectedPersons) {
     // create room & game
     const room = BattleService.createRoom(enemy, [socket.id, selectedPersons]);
     const game = BattleService.getGameByRoom(room);
-    const timer = game.timer;
 
     // join players to socket room
     const enemySocket = io.sockets.sockets.get(enemySocketId);
@@ -67,8 +66,11 @@ export default async function play(io, socket, selectedPersons) {
     enemySocket.join(room);
 
     // start timer
-    timer.start();
-    
+    const interval = BattleService.interval;
+    if (!interval) {
+      BattleService.createInterval(io);
+    }
+
     // send map to players
     io.to(room).emit("play", game.formatForClient());
   }
