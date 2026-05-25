@@ -16,7 +16,8 @@ export default class PotionModule extends Module {
   }
 
   whereCanUse(map, player, fromI, fromJ) {
-    return getPersonsByRadius(map, fromI, fromJ, this.radius);
+    const personsPoses = getPersonsByRadius(map, fromI, fromJ, this.radius);
+    return personsPoses.filter((pos) => map[pos[0]][pos[1]].content.hp > 1)
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
