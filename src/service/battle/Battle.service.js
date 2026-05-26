@@ -67,6 +67,7 @@ export default class BattleService {
             io.to(room).emit("end:time", { lost: timer.currentPlayerTimer.socketId });
             BattleService.timersByRoom.delete(room);
             BattleService.closeRoom(room);
+            io.in(room).socketsLeave(room);
           }
         } else {
           BattleService.timersByRoom.delete(room);

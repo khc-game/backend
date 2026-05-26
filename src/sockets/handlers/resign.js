@@ -7,4 +7,5 @@ export default async function resign(io, socket) {
   BattleService.checkInterval();
   
   socket.to(room).emit("end:resign");
+  io.in(room).socketsLeave(room);
 }

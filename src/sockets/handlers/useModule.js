@@ -50,6 +50,20 @@ export default async function useModule(io, socket, args) {
   // change turn
   game.toggleTurn();
 
+  // check dead characters
+  const isHasDiedChar = game.tryToClearDiedCharactersByChanges(changes);
+
   // send changes to client
   io.to(room).emit("module:mapUpdate", [changes, game.turn]);
+
+  // check player characters count
+  if (isHasDiedChar) {
+    const winnerId = game.isEnemyCharactersDestroed();
+    if (winnerId) {
+      io.to(room).emit("end:killed", { winnerId });
+      BattleService.closeRoom(room);
+      BattleService.checkInterval();
+      io.in(room).socketsLeave(room);
+    }
+  }
 }

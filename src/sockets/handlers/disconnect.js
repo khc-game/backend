@@ -16,4 +16,5 @@ export default async function disconnect(io, socket) {
   BattleService.closeRoom(room);
   BattleService.checkInterval();
   socket.to(room).emit("end:leave");
+  io.in(room).socketsLeave(room);
 }
