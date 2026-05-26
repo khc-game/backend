@@ -32,7 +32,7 @@ export default function getByRadius(map, i, j, radius) {
 
     if (map[i] && map[i][j]) {
       const checkingKey = `${i},${j}`;
-      if (map[i][j].content || checked.has(checkingKey)) {
+      if (map[i][j].character || checked.has(checkingKey)) {
         continue;
       } else {
         // core logic

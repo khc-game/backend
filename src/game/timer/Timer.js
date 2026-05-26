@@ -3,8 +3,8 @@ export default class Timer {
   pl2 = null;
   currentPlayerTimer = null;
 
-  constructor(pl1, pl2) {
-    const sessionSec = 60 * 10; // 10 minutes
+  constructor(pl1, pl2, sessionMinutes) {
+    const sessionSec = 60 * sessionMinutes;
     this.pl1 = { socketId: pl1, timer: sessionSec };
     this.pl2 = { socketId: pl2, timer: sessionSec };
     this.currentPlayerTimer = this.pl1;

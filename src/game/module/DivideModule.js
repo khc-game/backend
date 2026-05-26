@@ -29,7 +29,7 @@ export default class DivideModule extends Module {
 
       const cell = map[nx]?.[ny];
 
-      if (cell && cell?.content?.playerId !== player) {
+      if (cell && cell?.character?.playerId !== player) {
         return [[fromI, fromJ]];
       }
     }
@@ -58,7 +58,7 @@ export default class DivideModule extends Module {
 
       const cell = map[nx]?.[ny];
 
-      if (cell && cell?.content?.playerId !== player) {
+      if (cell && cell?.character?.playerId !== player) {
         whereCanUse.push([[nx], [ny]]);
       }
     }
@@ -68,13 +68,13 @@ export default class DivideModule extends Module {
     const randomInd = Math.floor(Math.random() * (whereCanUse.length));
     const [i, j] = whereCanUse[randomInd];
 
-    const originalCharacter = map[fromI][fromJ].content;
+    const originalCharacter = map[fromI][fromJ].character;
     const clonedCharacter = originalCharacter.clone();
     
     clonedCharacter.hp = originalCharacter.maxHP;
     clonedCharacter.maxHP = originalCharacter.maxHP;
     
-    map[i][j].content = clonedCharacter;
+    map[i][j].character = clonedCharacter;
     
     changes.push([i, j, map[i][j]]);
 

@@ -15,7 +15,7 @@ export default class TeleportModule extends Module {
     for (let i = 0; i < map.length; ++i) {
       for (let j = 0; j < map[i].length; ++j) {
         const cell = map[i][j];
-        if (!cell.content) {
+        if (!cell.character) {
           whereCanUse.push([i, j]);
         }
       }
@@ -28,9 +28,9 @@ export default class TeleportModule extends Module {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
     
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const cellData = map[fromI][fromJ].content;
-      map[fromI][fromJ].content = null;
-      map[toI][toJ].content = cellData;
+      const cellData = map[fromI][fromJ].character;
+      map[fromI][fromJ].character = null;
+      map[toI][toJ].character = cellData;
 
       addChanges(toI, toJ, map[toI][toJ]);
       addChanges(fromI, fromJ, map[fromI][fromJ]);

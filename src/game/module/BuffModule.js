@@ -16,8 +16,8 @@ export default class BuffModule extends Module {
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
-    map[fromI][fromJ].content.hp += 5;
-    map[fromI][fromJ].content.maxHP += 5;
+    map[fromI][fromJ].character.hp += 5;
+    map[fromI][fromJ].character.maxHP += 5;
 
     return [[fromI, fromJ, map[fromI][fromJ]]];
   }

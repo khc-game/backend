@@ -23,8 +23,8 @@ export default class VampirismModule extends Module {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
     
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const opponent = map[toI][toJ].content;
-      const player = map[fromI][fromJ].content;
+      const opponent = map[toI][toJ].character;
+      const player = map[fromI][fromJ].character;
       
       const bloodForPlayer = Math.floor((opponent.hp < this.blood ? opponent.hp : this.blood) / 2);
 

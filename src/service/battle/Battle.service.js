@@ -10,13 +10,13 @@ export default class BattleService {
   static timersByRoom = new Set();
   static interval = null;
 
-  static createRoom(p1, p2) {
+  static createRoom(p1, p2, sessionMinutes) {
     const [p1SocketId, p1Characters] = p1;
     const [p2SocketId, p2Characters] = p2;
 
     const room = crypto.randomUUID();
 
-    const game = new Game(p1, p2);
+    const game = new Game(p1, p2, sessionMinutes);
 
     BattleService.playerRoom.set(p1SocketId, room);
     BattleService.playerRoom.set(p2SocketId, room);
@@ -59,13 +59,18 @@ export default class BattleService {
 
       for (const room of timersIterator) {
         const game = BattleService.getGameByRoom(room);
-        const timer = game.timer;
-        timer.decrease();
-
-        if (timer.currentPlayerTimer.timer < 1) {
-          io.to(room).emit("end:time", { lost: timer.currentPlayerTimer.socketId });
+        if (game) {
+          const timer = game.timer;
+          timer.decrease();
+  
+          if (timer.currentPlayerTimer.timer < 1) {
+            io.to(room).emit("end:time", { lost: timer.currentPlayerTimer.socketId });
+            BattleService.timersByRoom.delete(room);
+            BattleService.closeRoom(room);
+          }
+        } else {
           BattleService.timersByRoom.delete(room);
-          BattleService.closeRoom(room);
+          BattleService.checkInterval();
         }
       }
     }, 1000);

@@ -11,7 +11,7 @@ export default class Game {
   cooldown = null;
   timer = null;
 
-  constructor(p1, p2) {
+  constructor(p1, p2, sessionMinutes) {
     const [p1SocketId, p1Characters] = p1;
     const [p2SocketId, p2Characters] = p2;
 
@@ -20,7 +20,7 @@ export default class Game {
     this.turn = p1SocketId;
     this.cooldown = new Cooldown();
     this.#initMap();
-    this.timer = new Timer(p1SocketId, p2SocketId);
+    this.timer = new Timer(p1SocketId, p2SocketId, sessionMinutes);
   }
 
   #initMap() {
@@ -46,11 +46,11 @@ export default class Game {
     const p2Characters = this.#initPlayerCharacters(this.p2);
 
     for (let i = 0; i < p1Characters.length; ++i) {
-      this.map[0][i].content = p1Characters[i];
+      this.map[0][i].character = p1Characters[i];
     }
 
     for (let i = 0; i < p2Characters.length; ++i) {
-      this.map[7][7 - i].content = p2Characters[i];
+      this.map[7][7 - i].character = p2Characters[i];
     }
   }
 
@@ -75,7 +75,7 @@ export default class Game {
   }
 
   getCharByPos(i, j) {
-    return this.map[i][j].content;
+    return this.map[i][j].character;
   }
 
   toggleTurn() {

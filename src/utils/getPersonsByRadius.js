@@ -37,7 +37,7 @@ export default function getPersonsByRadius(map, fromI, fromJ, radius) {
       } else {
         // core logic
         checked.add(checkingKey);
-        if (map[i][j].content) {
+        if (map[i][j].character) {
           availableSlots.push([i, j]);
         }
 

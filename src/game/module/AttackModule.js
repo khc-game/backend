@@ -23,8 +23,8 @@ export default class AttackModule extends Module {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
     
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const cellData = map[fromI][fromJ].content;
-      map[toI][toJ].content.attacked(this.damage);
+      const cellData = map[fromI][fromJ].character;
+      map[toI][toJ].character.attacked(this.damage);
 
       addChanges(toI, toJ, map[toI][toJ]);
     });

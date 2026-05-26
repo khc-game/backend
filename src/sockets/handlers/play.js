@@ -57,7 +57,8 @@ export default async function play(io, socket, selectedPersons) {
     QueueService.waiting = null;
 
     // create room & game
-    const room = BattleService.createRoom(enemy, [socket.id, selectedPersons]);
+    const sessionMinutes = 10;
+    const room = BattleService.createRoom(enemy, [socket.id, selectedPersons], sessionMinutes);
     const game = BattleService.getGameByRoom(room);
 
     // join players to socket room
