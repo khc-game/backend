@@ -44,13 +44,23 @@ export default class Game {
   #initPlayersCharacters() {
     const p1Characters = this.#initPlayerCharacters(this.p1);
     const p2Characters = this.#initPlayerCharacters(this.p2);
-
-    for (let i = 0; i < p1Characters.length; ++i) {
-      this.map[0][i].character = p1Characters[i];
+    
+    {
+      let midIndex = Math.floor(this.map.length / 2) - Math.floor(p1Characters.length / 2);
+      midIndex = midIndex < 0 ? 0 : midIndex;
+      
+      for (let i = 0; i < p1Characters.length; ++i) {
+        this.map[0][midIndex + i].character = p1Characters[i];
+      }
     }
-
-    for (let i = 0; i < p2Characters.length; ++i) {
-      this.map[7][7 - i].character = p2Characters[i];
+    
+    {
+      let midIndex = Math.floor(this.map.length / 2) - Math.floor(p2Characters.length / 2);
+      midIndex = midIndex < 0 ? 0 : midIndex;
+      
+      for (let i = 0; i < p2Characters.length; ++i) {
+        this.map[7][midIndex + i].character = p2Characters[i];
+      }
     }
   }
 
