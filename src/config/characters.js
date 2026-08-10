@@ -8,7 +8,7 @@ import AttackModule from "../game/module/AttackModule.js";
 import VampirismModule from "../game/module/VampirismModule.js";
 import TeleportModule from "../game/module/TeleportModule.js";
 import PotionModule from "../game/module/PotionModule.js";
-import DivideModule from '../game/module/DivideModule.js';
+import DivideModule from "../game/module/DivideModule.js";
 import BuffModule from "../game/module/BuffModule.js";
 
 export const characters = {
@@ -16,10 +16,7 @@ export const characters = {
     name: "Jellish",
     hp: 100,
     cost: 1,
-    modules: [
-      new MoveModule(3),
-      new AttackModule(75, 3),
-    ],
+    modules: [new MoveModule(3), new AttackModule(75, 3)],
   },
 
   rock: {
@@ -27,20 +24,14 @@ export const characters = {
     hp: 200,
     cost: 5,
 
-    modules: [
-      new MoveModule(1),
-      new AttackModule(40, 2),
-    ],
+    modules: [new MoveModule(1), new AttackModule(40, 2)],
   },
 
   vampire: {
     name: "Vampire",
     hp: 100,
     cost: 2,
-    modules: [
-      new MoveModule(4),
-      new VampirismModule(20, 1),
-    ],
+    modules: [new MoveModule(4), new VampirismModule(20, 1)],
   },
 
   bambrik: {
@@ -72,7 +63,7 @@ export const characters = {
     modules: [
       new AttackModule(5, 2),
       new DivideModule(1),
-      new BuffModule(2),
+      new BuffModule(2, 5),
     ],
   },
 };

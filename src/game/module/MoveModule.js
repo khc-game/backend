@@ -19,7 +19,7 @@ export default class MoveModule extends Module {
 
   use(map, player, fromI, fromJ, toI, toJ) {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
-    
+
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
       const cellData = map[fromI][fromJ].character;
       map[fromI][fromJ].character = null;

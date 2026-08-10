@@ -1,23 +1,23 @@
 // libs
-import express from 'express'
-import cors from 'cors'
-import http from 'http';
-import { Server } from "socket.io"
+import express from "express";
+import cors from "cors";
+import http from "http";
+import { Server } from "socket.io";
 import "colors";
 
 // routes
-import charactersRouter from './routes/chracter.router.js';
+import charactersRouter from "./routes/chracter.router.js";
 
 // listeners
-import disconnectListener from './sockets/handlers/disconnect.js';
-import playListener from './sockets/handlers/play.js'
-import cancelListener from './sockets/handlers/cancel.js'
-import resignListener from './sockets/handlers/resign.js'
-import selectModuleListener from './sockets/handlers/selectModule.js'
-import useModuleListener from './sockets/handlers/useModule.js'
+import disconnectListener from "./sockets/handlers/disconnect.js";
+import playListener from "./sockets/handlers/play.js";
+import cancelListener from "./sockets/handlers/cancel.js";
+import resignListener from "./sockets/handlers/resign.js";
+import selectModuleListener from "./sockets/handlers/selectModule.js";
+import useModuleListener from "./sockets/handlers/useModule.js";
 
 // config
-import socketConfig from './config/socket.js'
+import socketConfig from "./config/socket.js";
 
 const app = express();
 app.use(cors());
@@ -35,12 +35,12 @@ io.on("connection", async (socket) => {
   const withSocket = (handler) => {
     return (...args) => {
       return handler(io, socket, ...args);
-    }
+    };
   };
 
   socket.on("disconnect", withSocket(disconnectListener));
   socket.on("play", withSocket(playListener));
-  socket.on("cancel",  withSocket(cancelListener));
+  socket.on("cancel", withSocket(cancelListener));
   socket.on("resign", withSocket(resignListener));
   socket.on("module:select", withSocket(selectModuleListener));
   socket.on("module:use", withSocket(useModuleListener));

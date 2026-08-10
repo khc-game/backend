@@ -1,23 +1,27 @@
 // services
-import QueueService from '../../service/queue/Queue.service.js';
-import BattleService from '../../service/battle/Battle.service.js';
+import QueueService from "../../service/queue/Queue.service.js";
+import BattleService from "../../service/battle/Battle.service.js";
 
 // config
-import { characters } from '../../config/characters.js'
+import { characters } from "../../config/characters.js";
 
 export default async function play(io, socket, selectedPersons) {
-  console.log('[play]', socket.id);
+  console.log("[play]", socket.id);
 
   // VALIDATIONS
 
   // cant play again if already in room
   const room = BattleService.getRoomBySocketId(socket.id);
-  const isPlayWhilePlaying = room || (QueueService.waiting && QueueService.waiting[0] === socket.id);
+  const isPlayWhilePlaying =
+    room || (QueueService.waiting && QueueService.waiting[0] === socket.id);
   if (isPlayWhilePlaying) return;
 
   // if player characters not selected
   if (selectedPersons === null) {
-    return socket.emit("message", "Persons is not selected. Select min 1 character");
+    return socket.emit(
+      "message",
+      "Persons is not selected. Select min 1 character",
+    );
   }
 
   // player send not array
@@ -28,7 +32,10 @@ export default async function play(io, socket, selectedPersons) {
   // check characters count
   const maxCharacters = 8;
   if (selectedPersons.length === 0 || selectedPersons.length > maxCharacters) {
-    return socket.emit("message", "Max characters count only can be from 1 to 8");
+    return socket.emit(
+      "message",
+      "Max characters count only can be from 1 to 8",
+    );
   }
 
   // check character availability & cost
@@ -43,11 +50,14 @@ export default async function play(io, socket, selectedPersons) {
   }
 
   if (totalCost > maxCharacters) {
-    return socket.emit("message", `Total cost is biggest than ${maxCharacters}`);
+    return socket.emit(
+      "message",
+      `Total cost is biggest than ${maxCharacters}`,
+    );
   }
 
   // GAME
-  
+
   if (QueueService.waiting === null) {
     QueueService.add(socket.id, selectedPersons);
   } else {
@@ -58,7 +68,11 @@ export default async function play(io, socket, selectedPersons) {
 
     // create room & game
     const sessionMinutes = 10;
-    const room = BattleService.createRoom(enemy, [socket.id, selectedPersons], sessionMinutes);
+    const room = BattleService.createRoom(
+      enemy,
+      [socket.id, selectedPersons],
+      sessionMinutes,
+    );
     const game = BattleService.getGameByRoom(room);
 
     // join players to socket room

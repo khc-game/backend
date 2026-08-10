@@ -6,9 +6,10 @@ import getByRadius from "../../utils/getByRadius.js";
 import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
 export default class BuffModule extends Module {
-  constructor(cooldown) {
+  constructor(cooldown, buffSize) {
     super("Buff");
     this.cooldown = cooldown;
+    this.buffSize = buffSize;
   }
 
   whereCanUse(map, player, fromI, fromJ) {
@@ -16,8 +17,8 @@ export default class BuffModule extends Module {
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
-    map[fromI][fromJ].character.hp += 5;
-    map[fromI][fromJ].character.maxHP += 5;
+    map[fromI][fromJ].character.hp += this.buffSize;
+    map[fromI][fromJ].character.maxHP += this.buffSize;
 
     return [[fromI, fromJ, map[fromI][fromJ]]];
   }
