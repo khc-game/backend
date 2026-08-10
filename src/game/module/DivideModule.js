@@ -5,6 +5,9 @@ import Module from "./Module.js";
 import getByRadius from "../../utils/getByRadius.js";
 import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
+// constants
+import changeTypes from "../../constants/changeTypes.js";
+
 export default class DivideModule extends Module {
   constructor(cooldown) {
     super("Divide");
@@ -33,14 +36,14 @@ export default class DivideModule extends Module {
         return [[fromI, fromJ]];
       }
     }
-    
+
     return [];
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
     if (canUseAt.length === 0) return [];
-    
+
     const dist = [
       [0, 1],
       [0, -1],
@@ -65,18 +68,21 @@ export default class DivideModule extends Module {
 
     const changes = [];
 
-    const randomInd = Math.floor(Math.random() * (whereCanUse.length));
+    const randomInd = Math.floor(Math.random() * whereCanUse.length);
     const [i, j] = whereCanUse[randomInd];
 
     const originalCharacter = map[fromI][fromJ].character;
     const clonedCharacter = originalCharacter.clone();
-    
+
     clonedCharacter.hp = originalCharacter.maxHP;
     clonedCharacter.maxHP = originalCharacter.maxHP;
-    
+
     map[i][j].character = clonedCharacter;
-    
-    changes.push([i, j, map[i][j]]);
+
+    changes.push({
+      changeType: changeTypes.SPAWN_CHARACTER,
+      data: [i, j, clonedCharacter],
+    });
 
     return changes;
   }

@@ -1,8 +1,8 @@
 export default function findCaUseCollision(canUseAt, toI, toJ, callBack) {
   const changes = [];
 
-  const addChanges = (i, j, newCellData) => {
-    changes.push([i, j, newCellData]);
+  const addChanges = (changeType, data) => {
+    changes.push({ changeType, data });
   };
 
   for (let i = 0; i < canUseAt.length; ++i) {

@@ -5,6 +5,9 @@ import Module from "./Module.js";
 import getByRadius from "../../utils/getByRadius.js";
 import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
+// constants
+import changeTypes from "../../constants/changeTypes.js";
+
 export default class BuffModule extends Module {
   constructor(cooldown, buffSize) {
     super("Buff");
@@ -20,7 +23,10 @@ export default class BuffModule extends Module {
     map[fromI][fromJ].character.hp += this.buffSize;
     map[fromI][fromJ].character.maxHP += this.buffSize;
 
-    return [[fromI, fromJ, map[fromI][fromJ]]];
+    return [
+      { changeType: changeTypes.BUFF, data: ["hp", this.buffSize] },
+      { changeType: changeTypes.BUFF, data: ["maxHp", this.buffSize] },
+    ];
   }
 
   copy() {

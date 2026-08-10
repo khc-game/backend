@@ -3,6 +3,9 @@ import Character from "../character/Character.js";
 import Cooldown from "../cooldown/Cooldown.js";
 import Timer from "../timer/Timer.js";
 
+// constants
+import changeTypes from "../../constants/changeTypes.js";
+
 export default class Game {
   p1 = null;
   p2 = null;
@@ -100,9 +103,15 @@ export default class Game {
     let isHasDiedChar = false;
 
     for (let i = 0; i < changes.length; ++i) {
-      const [posI, posJ, newCellData] = changes[i];
-      if (newCellData.character && newCellData.character.hp === 0) {
-        newCellData.character = null;
+      const { changeType, data } = changes[i];
+
+      if (changeType !== changeTypes.DAMAGE) continue;
+      const [posI, posJ] = data;
+
+      const cellData = this.map[posI][posJ];
+
+      if (cellData.character && cellData.character.hp === 0) {
+        cellData.character = null;
         isHasDiedChar = true;
       }
     }

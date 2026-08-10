@@ -5,6 +5,9 @@ import Module from "./Module.js";
 import getByRadius from "../../utils/getByRadius.js";
 import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
+// constants
+import changeTypes from "../../constants/changeTypes.js";
+
 export default class MoveModule extends Module {
   radius = null;
 
@@ -21,12 +24,11 @@ export default class MoveModule extends Module {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
 
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const cellData = map[fromI][fromJ].character;
+      const character = map[fromI][fromJ].character;
       map[fromI][fromJ].character = null;
-      map[toI][toJ].character = cellData;
+      map[toI][toJ].character = character;
 
-      addChanges(fromI, fromJ, map[fromI][fromJ]);
-      addChanges(toI, toJ, map[toI][toJ]);
+      addChanges(changeTypes.MOVE, [fromI, fromJ, toI, toJ]);
     });
 
     return changes;

@@ -5,6 +5,9 @@ import Module from "./Module.js";
 import getPersonsByRadius from "../../utils/getPersonsByRadius.js";
 import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
+// constants
+import changeTypes from "../../constants/changeTypes.js";
+
 export default class AttackModule extends Module {
   damage = null;
   radius = null;
@@ -21,12 +24,12 @@ export default class AttackModule extends Module {
 
   use(map, player, fromI, fromJ, toI, toJ) {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
-    
+
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
       const cellData = map[fromI][fromJ].character;
       map[toI][toJ].character.attacked(this.damage);
 
-      addChanges(toI, toJ, map[toI][toJ]);
+      addChanges(changeTypes.DAMAGE, [toI, toJ, this.damage]);
     });
 
     return changes;
