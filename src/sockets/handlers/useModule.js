@@ -54,7 +54,7 @@ export default async function useModule(io, socket, args) {
   const isHasDiedChar = game.tryToClearDiedCharactersByChanges(changes);
 
   // send changes to client
-  io.to(room).emit("module:mapUpdate", [changes, game.turn]);
+  io.to(room).emit("module:changes", [changes, game.turn]);
 
   // check player characters count
   if (isHasDiedChar) {
