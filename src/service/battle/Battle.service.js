@@ -1,8 +1,8 @@
 // libs
-import crypto from 'crypto';
+import crypto from "crypto";
 
 // game
-import Game from '../../game/game/Game.game.js';
+import Game from "../../game/game/Game.js";
 
 export default class BattleService {
   static playerRoom = new Map();
@@ -46,7 +46,7 @@ export default class BattleService {
     if (game) {
       const p1Id = game.p1[0];
       const p2Id = game.p2[0];
-  
+
       BattleService.playerRoom.delete(p1Id);
       BattleService.playerRoom.delete(p2Id);
       BattleService.battles.delete(room);
@@ -62,9 +62,11 @@ export default class BattleService {
         if (game) {
           const timer = game.timer;
           timer.decrease();
-  
+
           if (timer.currentPlayerTimer.timer < 1) {
-            io.to(room).emit("end:time", { lost: timer.currentPlayerTimer.socketId });
+            io.to(room).emit("end:time", {
+              lost: timer.currentPlayerTimer.socketId,
+            });
             BattleService.timersByRoom.delete(room);
             BattleService.closeRoom(room);
             io.in(room).socketsLeave(room);
