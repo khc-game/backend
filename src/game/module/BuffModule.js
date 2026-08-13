@@ -36,6 +36,6 @@ export default class BuffModule extends Module {
   }
 
   copy() {
-    return new BuffModule(this.cooldown);
+    return new BuffModule(this.cooldown, this.buffSize);
   }
 }
