@@ -10,9 +10,8 @@ import changeTypes from "../../constants/changeTypes.js";
 
 export default class BuffModule extends Module {
   constructor(buffSize, cooldown) {
-    super("Buff");
+    super("Buff", cooldown);
     this.buffSize = buffSize;
-    this.cooldown = cooldown;
   }
 
   whereCanUse(map, player, fromI, fromJ) {

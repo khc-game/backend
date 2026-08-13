@@ -10,8 +10,7 @@ import changeTypes from "../../constants/changeTypes.js";
 
 export default class DivideModule extends Module {
   constructor(cooldown) {
-    super("Divide");
-    this.cooldown = cooldown;
+    super("Divide", cooldown);
   }
 
   whereCanUse(map, player, fromI, fromJ) {
