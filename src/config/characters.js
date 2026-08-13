@@ -63,7 +63,7 @@ export const characters = {
     modules: [
       new AttackModule(5, 2),
       new DivideModule(1),
-      new BuffModule(2, 5),
+      new BuffModule(5, 2),
     ],
   },
 };
