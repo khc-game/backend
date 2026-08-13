@@ -30,6 +30,9 @@ export default class AttackModule extends Module {
       map[toI][toJ].character.attacked(this.damage);
 
       addChanges(changeTypes.DAMAGE, [toI, toJ, this.damage]);
+      if (map[toI][toJ].character.hp <= 0) {
+        addChanges(changeTypes.DEAD, [toI, toJ]);
+      }
     });
 
     return changes;
