@@ -1,5 +1,5 @@
 // game
-import Module from "./Module.js";
+import Module from "./interface/Module.js";
 
 // utils
 import getByRadius from "../../utils/getByRadius.js";
@@ -9,10 +9,10 @@ import findCanUseCollision from "../../utils/findCanUseCollision.js";
 import changeTypes from "../../constants/changeTypes.js";
 
 export default class BuffModule extends Module {
-  constructor(cooldown, buffSize) {
+  constructor(buffSize, cooldown) {
     super("Buff");
-    this.cooldown = cooldown;
     this.buffSize = buffSize;
+    this.cooldown = cooldown;
   }
 
   whereCanUse(map, player, fromI, fromJ) {

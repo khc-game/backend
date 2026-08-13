@@ -1,5 +1,5 @@
 // game
-import Module from "./Module.js";
+import Module from "./interface/Module.js";
 
 // utils
 import getPersonsByRadius from "../../utils/getPersonsByRadius.js";
@@ -12,8 +12,8 @@ export default class VampirismModule extends Module {
   blood = null;
   radius = null;
 
-  constructor(blood, radius) {
-    super("Vampirism");
+  constructor(blood, radius, cooldown) {
+    super("Vampirism", cooldown);
     this.blood = blood;
     this.radius = radius;
   }

@@ -1,5 +1,5 @@
 // game
-import Module from "./Module.js";
+import Module from "./interface/Module.js";
 
 // utils
 import getPersonsByRadius from "../../utils/getPersonsByRadius.js";
@@ -12,7 +12,7 @@ export default class PotionModule extends Module {
   radius = null;
   heal = null;
 
-  constructor(heal, cooldown, radius) {
+  constructor(heal, radius, cooldown) {
     super("Potion", cooldown);
     this.heal = heal;
     this.radius = radius;
