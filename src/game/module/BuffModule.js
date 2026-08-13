@@ -24,8 +24,14 @@ export default class BuffModule extends Module {
     map[fromI][fromJ].character.maxHP += this.buffSize;
 
     return [
-      { changeType: changeTypes.BUFF, data: ["hp", this.buffSize] },
-      { changeType: changeTypes.BUFF, data: ["maxHp", this.buffSize] },
+      {
+        changeType: changeTypes.BUFF,
+        data: [fromI, fromJ, "hp", this.buffSize],
+      },
+      {
+        changeType: changeTypes.BUFF,
+        data: [fromI, fromJ, "maxHp", this.buffSize],
+      },
     ];
   }
 
