@@ -33,7 +33,7 @@ export const characters = {
     name: "Rock",
     hp: 200,
     cost: 5,
-    modules: [new MoveModule(1), new AttackModule(45550, 2)],
+    modules: [new MoveModule(1), new AttackModule(40, 2)],
   },
 
   vampire: {
