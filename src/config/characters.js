@@ -10,16 +10,53 @@ import ShopItemCharacterModule from "../game/module/ShopItemCharacterModule.js";
 
 export const characters = {
   chess_king: {
-    name: "King",
+    name: "Kingy",
     hp: 100,
     cost: 5,
     shop: ["Figure's Shop", 7, 1],
     modules: [
       new MoveModule(1),
       new AttackModule(50, 1),
-      new ShopItemCharacterModule("jellish", 1),
-      new ShopItemCharacterModule("rock", 5),
+      new ShopItemCharacterModule("chess_pawn", 1),
+      new ShopItemCharacterModule("chess_knight", 2),
+      new ShopItemCharacterModule("chess_bishop", 3),
+      new ShopItemCharacterModule("chess_rook", 4),
     ],
+  },
+
+  chess_queen: {
+    name: "Queeny",
+    hp: 100,
+    cantSelect: true,
+    modules: [new MoveModule(), new AttackModule()],
+  },
+
+  chess_rook: {
+    name: "Roko",
+    hp: 100,
+    cantSelect: true,
+    modules: [new MoveModule(), new AttackModule()],
+  },
+
+  chess_bishop: {
+    name: "Bishpi",
+    hp: 100,
+    cantSelect: true,
+    modules: [new MoveModule(), new AttackModule()],
+  },
+
+  chess_knight: {
+    name: "Knith",
+    hp: 100,
+    cantSelect: true,
+    modules: [new MoveModule(1), new AttackModule(5, 1)],
+  },
+
+  chess_pawn: {
+    name: "Pawon",
+    hp: 100,
+    cantSelect: true,
+    modules: [new MoveModule(1), new AttackModule(5, 1)],
   },
 
   jellish: {
