@@ -1,5 +1,5 @@
 // game
-import Module from "./interface/Module.js";
+import Module from "./interface/IModule.js";
 
 // utils
 import getByRadius from "../../utils/getByRadius.js";
@@ -31,7 +31,7 @@ export default class DivideModule extends Module {
 
       const cell = map[nx]?.[ny];
 
-      if (cell && cell?.character?.playerId !== player) {
+      if (cell && cell?.character === null) {
         return [[fromI, fromJ]];
       }
     }
@@ -60,8 +60,8 @@ export default class DivideModule extends Module {
 
       const cell = map[nx]?.[ny];
 
-      if (cell && cell?.character?.playerId !== player) {
-        whereCanUse.push([[nx], [ny]]);
+      if (cell && cell?.character === null) {
+        whereCanUse.push([nx, ny]);
       }
     }
 

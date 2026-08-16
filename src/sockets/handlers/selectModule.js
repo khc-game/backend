@@ -25,10 +25,15 @@ export default async function selectModule(io, socket, args) {
   const modules = character.modules;
   const module = modules[ind];
   if (!module) return;
-  
+
   // check module's cooldown
   const cooldown = game.cooldown;
   if (cooldown.has(socket.id, module.id)) return;
+
+  // check shop
+  if (module.isShopItem) {
+    if (character.shop[1] < module.cost) return;
+  }
 
   // calculate
   const canUseAt = module.whereCanUse(game.map, socket.id, i, j);

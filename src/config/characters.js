@@ -1,7 +1,3 @@
-/*
-  Person: playerId, name, hp, _maxHp, modules
-*/
-
 // game
 import MoveModule from "../game/module/MoveModule.js";
 import AttackModule from "../game/module/AttackModule.js";
@@ -10,8 +6,22 @@ import TeleportModule from "../game/module/TeleportModule.js";
 import PotionModule from "../game/module/PotionModule.js";
 import DivideModule from "../game/module/DivideModule.js";
 import BuffModule from "../game/module/BuffModule.js";
+import ShopItemCharacterModule from "../game/module/ShopItemCharacterModule.js";
 
 export const characters = {
+  king: {
+    name: "King",
+    hp: 100,
+    cost: 5,
+    shop: ["Figure's Shop", 7, 1],
+    modules: [
+      new MoveModule(1),
+      new AttackModule(50, 1),
+      new ShopItemCharacterModule("jellish", 1),
+      new ShopItemCharacterModule("rock", 5),
+    ],
+  },
+
   jellish: {
     name: "Jellish",
     hp: 100,
@@ -23,8 +33,7 @@ export const characters = {
     name: "Rock",
     hp: 200,
     cost: 5,
-
-    modules: [new MoveModule(1), new AttackModule(40, 2)],
+    modules: [new MoveModule(1), new AttackModule(45550, 2)],
   },
 
   vampire: {

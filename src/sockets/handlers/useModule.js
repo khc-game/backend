@@ -2,7 +2,7 @@
 import BattleService from "../../service/battle/Battle.service.js";
 
 export default async function useModule(io, socket, args) {
-  const { ind, fromI, fromJ, toI, toJ } = args;
+  const { ind, fromI, fromJ, toI, toJ, ...otherData } = args;
 
   // find room
   const room = BattleService.getRoomBySocketId(socket.id);
@@ -15,14 +15,10 @@ export default async function useModule(io, socket, args) {
   // check turn
   if (game.turn !== socket.id) return;
 
-  // check character on position
+  // check character
   const character = game.getCharByPos(fromI, fromJ);
   if (!character) return;
-
-  // check character hp
   if (character.hp === 0) return;
-
-  // check character owner
   if (character.playerId !== socket.id) return;
 
   // check module ind
@@ -32,26 +28,36 @@ export default async function useModule(io, socket, args) {
 
   // check cooldown
   const cooldown = game.cooldown;
-
-  // if cooldown have
   if (cooldown.has(socket.id, module.title)) return;
 
-  // decrement cooldown
-  cooldown.countDownForCurrentPlayer(socket.id);
+  // use module
+  let changes = [];
+
+  if (module.isShopItem) {
+    if (character.shop[1] >= module.cost) {
+      character.shop[1] -= module.cost;
+      changes = module.use(game.map, socket.id, fromI, fromJ, toI, toJ);
+    } else {
+      return;
+    }
+  } else {
+    changes = module.use(game.map, socket.id, fromI, fromJ, toI, toJ);
+  }
 
   // set cooldown
+  cooldown.countDownForCurrentPlayer(socket.id);
   if (module.cooldown) {
     cooldown.add(socket.id, module.id, module.cooldown);
   }
 
-  // calculate
-  const changes = module.use(game.map, socket.id, fromI, fromJ, toI, toJ);
+  // call after turn
+  game.afterMove(game.map, socket.id, fromI, fromJ, changes);
 
   // change turn
   game.toggleTurn();
 
   // check dead characters
-  const isHasDiedChar = game.tryToClearDiedCharactersByChanges(changes);
+  const isHasDiedChar = game.tryToClearDiedCharacters();
 
   // send changes to client
   io.to(room).emit("module:changes", [changes, game.turn]);

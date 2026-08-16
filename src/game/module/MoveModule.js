@@ -1,5 +1,5 @@
 // game
-import Module from "./interface/Module.js";
+import Module from "./interface/IModule.js";
 
 // utils
 import getByRadius from "../../utils/getByRadius.js";

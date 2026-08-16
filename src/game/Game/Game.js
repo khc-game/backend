@@ -31,7 +31,7 @@ export default class Game {
     // create map
     this.map = [];
 
-    const mapSize = 8;
+    const mapSize = 5;
     for (let i = 0; i < mapSize; ++i) {
       const line = [];
       for (let j = 0; j < mapSize; ++j) {
@@ -65,7 +65,7 @@ export default class Game {
       midIndex = midIndex < 0 ? 0 : midIndex;
 
       for (let i = 0; i < p2Characters.length; ++i) {
-        this.map[7][midIndex + i].character = p2Characters[i];
+        this.map[this.map.length - 1][midIndex + i].character = p2Characters[i];
       }
     }
   }
@@ -100,19 +100,33 @@ export default class Game {
   }
 
   tryToClearDiedCharactersByChanges(changes) {
+    // ! NEED refactor
+    // let isHasDiedChar = false;
+    // for (let i = 0; i < changes.length; ++i) {
+    //   const { changeType, data } = changes[i];
+    //   const [posI, posJ] = data;
+    //   const cellData = this.map[posI][posJ];
+    //   if (cellData.character && cellData.character.hp === 0) {
+    //     cellData.character = null;
+    //     isHasDiedChar = true;
+    //   }
+    // }
+    // return isHasDiedChar;
+  }
+
+  tryToClearDiedCharacters() {
+    // using instead of tryToClearDiedCharactersByChanges
+
     let isHasDiedChar = false;
 
-    for (let i = 0; i < changes.length; ++i) {
-      const { changeType, data } = changes[i];
+    for (let i = 0; i < this.map.length; ++i) {
+      for (let j = 0; j < this.map[i].length; ++j) {
+        const cellData = this.map[i][j];
 
-      if (changeType !== changeTypes.DAMAGE) continue;
-      const [posI, posJ] = data;
-
-      const cellData = this.map[posI][posJ];
-
-      if (cellData.character && cellData.character.hp === 0) {
-        cellData.character = null;
-        isHasDiedChar = true;
+        if (cellData.character && cellData.character.hp <= 0) {
+          cellData.character = null;
+          isHasDiedChar = true;
+        }
       }
     }
 
@@ -135,5 +149,16 @@ export default class Game {
     }
 
     return Array.from(players)[0];
+  }
+
+  afterMove(map, playerId, fromI, fromJ, changes) {
+    for (let i = 0; i < this.map.length; ++i) {
+      for (let j = 0; j < this.map[i].length; ++j) {
+        const { character } = this.map[i][j];
+        if (character && character.playerId === playerId) {
+          character.afterMove(map, playerId, fromI, fromJ, changes);
+        }
+      }
+    }
   }
 }

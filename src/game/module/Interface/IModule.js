@@ -1,11 +1,7 @@
 // libs
 import crypto from "crypto";
 
-export default class Module {
-  id = null;
-  title = null;
-  cooldown = null;
-
+export default class IModule {
   constructor(title, cooldown = null) {
     this.id = crypto.randomUUID();
     this.title = title;
@@ -23,4 +19,7 @@ export default class Module {
   copy() {
     throw new Error("Must be implemented");
   }
+
+  // if need do something
+  afterMove(map, playerId, fromI, fromJ, changes) {}
 }
