@@ -38,6 +38,9 @@ export default class VampirismModule extends Module {
 
       addChanges(changeTypes.HEAL, [fromI, fromJ, bloodForPlayer]);
       addChanges(changeTypes.DAMAGE, [toI, toJ, this.blood]);
+      if (opponent.hp <= 0) {
+        addChanges(changeTypes.DEAD, [toI, toJ]);
+      }
     });
 
     return changes;

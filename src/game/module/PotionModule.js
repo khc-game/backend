@@ -27,8 +27,10 @@ export default class PotionModule extends Module {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
 
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
+      const currentHp = map[toI][toJ].character.hp;
       map[toI][toJ].character.heal(this.heal);
-      addChanges(changeTypes.HEAL, [toI, toJ, this.heal]);
+      const updateHp = map[toI][toJ].character.hp;
+      addChanges(changeTypes.HEAL, [toI, toJ, updateHp - currentHp]);
     });
 
     return changes;
