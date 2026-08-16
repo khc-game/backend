@@ -9,7 +9,7 @@ import BuffModule from "../game/module/BuffModule.js";
 import ShopItemCharacterModule from "../game/module/ShopItemCharacterModule.js";
 
 export const characters = {
-  king: {
+  chess_king: {
     name: "King",
     hp: 100,
     cost: 5,
