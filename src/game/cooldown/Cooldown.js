@@ -16,8 +16,8 @@ export default class Cooldown {
   countDownForCurrentPlayer(moduleId) {
     for (const id in this.cooldowns) {
       if (id === moduleId) continue;
-      
-      if (--this.cooldowns[id] === 0) {
+
+      if (--this.cooldowns[id] < 0) {
         delete this.cooldowns[id];
       }
     }
