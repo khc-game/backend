@@ -12,8 +12,8 @@ import changeTypes from "../../constants/changeTypes.js";
 import { characters } from "../../config/characters.js";
 
 export default class ShopItemCharacterModule extends IShopItemModule {
-  constructor(title, cost, cooldown = null, shop = null) {
-    super(title, cost, IShopItemModule.types.player, cooldown, shop);
+  constructor(title, cost, cooldown = null) {
+    super(title, cost, IShopItemModule.types.player, cooldown);
   }
 
   whereCanUse(map, player, fromI, fromJ) {

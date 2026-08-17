@@ -87,6 +87,6 @@ export default class DivideModule extends Module {
   }
 
   copy() {
-    return new DivideModule();
+    return new DivideModule(this.cooldown);
   }
 }

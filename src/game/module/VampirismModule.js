@@ -47,6 +47,6 @@ export default class VampirismModule extends Module {
   }
 
   copy() {
-    return new VampirismModule(this.blood, this.radius);
+    return new VampirismModule(this.blood, this.radius, this.cooldown);
   }
 }

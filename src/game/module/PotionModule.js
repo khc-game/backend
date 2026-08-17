@@ -37,6 +37,6 @@ export default class PotionModule extends Module {
   }
 
   copy() {
-    return new PotionModule(this.heal, this.cooldown, this.radius);
+    return new PotionModule(this.heal, this.radius, this.cooldown);
   }
 }
