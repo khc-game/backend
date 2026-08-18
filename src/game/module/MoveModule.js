@@ -1,6 +1,6 @@
 // game
 import Module from "./interface/IModule.js";
-import TargetingCalculator from "../targetingCalculator/TargetingCalculator.js";
+import TargetingCalculator from "../TargetingCalculator.js";
 
 // utils
 import getByRadius from "../../utils/getByRadius.js";

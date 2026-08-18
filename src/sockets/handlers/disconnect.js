@@ -1,6 +1,6 @@
 // service
-import BattleService from "../../game/battle/Battle.service.js";
-import QueueService from "../../game/queue/Queue.service.js";
+import BattleService from "../../game/Battle.service.js";
+import QueueService from "../../game/Queue.service.js";
 
 export default async function disconnect(io, socket) {
   console.log("[disconnected]", socket.id);

@@ -2,7 +2,7 @@
 import crypto from "crypto";
 
 // game
-import TargetingCalculator from "../../targetingCalculator/TargetingCalculator.js";
+import TargetingCalculator from "../../TargetingCalculator.js";
 
 // utils
 import findCanUseCollision from "../../../utils/findCanUseCollision.js";

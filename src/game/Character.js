@@ -1,5 +1,5 @@
 // constants
-import { characters } from "../../config/characters.js";
+import { characters } from "../config/characters.js";
 
 export default class Character {
   name = null;

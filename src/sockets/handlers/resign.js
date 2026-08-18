@@ -1,5 +1,5 @@
 // game
-import BattleService from "../../game/battle/Battle.service.js";
+import BattleService from "../../game/Battle.service.js";
 
 export default async function resign(io, socket) {
   const room = BattleService.getRoomBySocketId(socket.id);

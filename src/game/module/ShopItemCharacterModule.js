@@ -1,5 +1,5 @@
 // character
-import Character from "../character/Character.js";
+import Character from "../Character.js";
 
 // module
 import IShopItemModule from "./Interface/IShopItemModule.js";

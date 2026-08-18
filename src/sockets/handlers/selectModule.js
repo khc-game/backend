@@ -1,5 +1,5 @@
 // game
-import BattleService from "../../game/battle/Battle.service.js";
+import BattleService from "../../game/Battle.service.js";
 
 export default async function selectModule(io, socket, args) {
   const { i, j, ind } = args;

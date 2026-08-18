@@ -1,6 +1,6 @@
 // services
-import QueueService from "../../game/queue/Queue.service.js";
-import BattleService from "../../game/battle/Battle.service.js";
+import QueueService from "../../game/Queue.service.js";
+import BattleService from "../../game/Battle.service.js";
 
 // config
 import { characters } from "../../config/characters.js";

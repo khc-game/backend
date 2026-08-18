@@ -1,10 +1,10 @@
 // game
-import Character from "../character/Character.js";
-import Cooldown from "../cooldown/Cooldown.js";
-import Timer from "../timer/Timer.js";
+import Character from "./Character.js";
+import Cooldown from "./Cooldown.js";
+import Timer from "./Timer.js";
 
 // constants
-import changeTypes from "../../constants/changeTypes.js";
+import changeTypes from "../constants/changeTypes.js";
 
 export default class Game {
   p1 = null;

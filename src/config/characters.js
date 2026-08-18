@@ -11,7 +11,7 @@ import ShopItemCharacterModule from "../game/module/ShopItemCharacterModule.js";
 import PatternRadius from "../game/patterns/PatternRadius.js";
 
 // rule
-import Rule from "../game/rule/Rule.js";
+import Rule from "../game/Rule.js";
 
 export const characters = {
   test: {
