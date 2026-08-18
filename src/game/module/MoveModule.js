@@ -1,5 +1,6 @@
 // game
 import Module from "./interface/IModule.js";
+import TargetingCalculator from "../targetingCalculator/TargetingCalculator.js";
 
 // utils
 import getByRadius from "../../utils/getByRadius.js";
@@ -9,15 +10,18 @@ import findCanUseCollision from "../../utils/findCanUseCollision.js";
 import changeTypes from "../../constants/changeTypes.js";
 
 export default class MoveModule extends Module {
-  radius = null;
-
-  constructor(radius) {
+  constructor() {
     super("Move");
-    this.radius = radius;
   }
 
   whereCanUse(map, player, fromI, fromJ) {
-    return getByRadius(map, fromI, fromJ, this.radius);
+    return new TargetingCalculator(
+      map,
+      fromI,
+      fromJ,
+      this.patterns,
+      this.filters,
+    );
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
@@ -35,6 +39,9 @@ export default class MoveModule extends Module {
   }
 
   copy() {
-    return new MoveModule(this.radius);
+    const copy = new MoveModule(this.radius);
+    copy.patterns = this.patterns;
+    copy.filters = this.filters;
+    return copy;
   }
 }
