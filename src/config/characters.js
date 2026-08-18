@@ -23,6 +23,9 @@ export const characters = {
       new MoveModule().addPattern(
         new PatternRadius(2, new Rule().setCharacter(false, true)),
       ),
+      new AttackModule(10).addPattern(
+        new PatternRadius(4, new Rule().setCharacter(true, true)),
+      ),
     ],
   },
 

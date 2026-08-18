@@ -1,5 +1,6 @@
 // game
 import Module from "./interface/IModule.js";
+import TargetingCalculator from "../targetingCalculator/TargetingCalculator.js";
 
 // utils
 import getPersonsByRadius from "../../utils/getPersonsByRadius.js";
@@ -9,17 +10,19 @@ import findCanUseCollision from "../../utils/findCanUseCollision.js";
 import changeTypes from "../../constants/changeTypes.js";
 
 export default class AttackModule extends Module {
-  damage = null;
-  radius = null;
-
-  constructor(damage, radius) {
+  constructor(damage) {
     super("Attack");
     this.damage = damage;
-    this.radius = radius;
   }
 
   whereCanUse(map, player, fromI, fromJ) {
-    return getPersonsByRadius(map, fromI, fromJ, this.radius);
+    return new TargetingCalculator(
+      map,
+      fromI,
+      fromJ,
+      this.patterns,
+      this.filters,
+    );
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
@@ -39,6 +42,9 @@ export default class AttackModule extends Module {
   }
 
   copy() {
-    return new AttackModule(this.damage, this.radius);
+    const copy = new AttackModule(this.damage, this.radius);
+    copy.patterns = this.patterns;
+    copy.filters = this.filters;
+    return copy;
   }
 }
