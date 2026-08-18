@@ -14,28 +14,12 @@ export default class MoveModule extends Module {
     super("Move");
   }
 
-  whereCanUse(map, player, fromI, fromJ) {
-    return new TargetingCalculator(
-      map,
-      fromI,
-      fromJ,
-      this.patterns,
-      this.filters,
-    );
-  }
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+    const character = map[fromI][fromJ].character;
+    map[fromI][fromJ].character = null;
+    map[toI][toJ].character = character;
 
-  use(map, player, fromI, fromJ, toI, toJ) {
-    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
-
-    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const character = map[fromI][fromJ].character;
-      map[fromI][fromJ].character = null;
-      map[toI][toJ].character = character;
-
-      addChanges(changeTypes.MOVE, [fromI, fromJ, toI, toJ]);
-    });
-
-    return changes;
+    addChanges(changeTypes.MOVE, [fromI, fromJ, toI, toJ]);
   }
 
   copy() {

@@ -15,30 +15,14 @@ export default class AttackModule extends Module {
     this.damage = damage;
   }
 
-  whereCanUse(map, player, fromI, fromJ) {
-    return new TargetingCalculator(
-      map,
-      fromI,
-      fromJ,
-      this.patterns,
-      this.filters,
-    );
-  }
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+    const cellData = map[fromI][fromJ].character;
+    map[toI][toJ].character.attacked(this.damage);
 
-  use(map, player, fromI, fromJ, toI, toJ) {
-    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
-
-    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const cellData = map[fromI][fromJ].character;
-      map[toI][toJ].character.attacked(this.damage);
-
-      addChanges(changeTypes.DAMAGE, [toI, toJ, this.damage]);
-      if (map[toI][toJ].character.hp <= 0) {
-        addChanges(changeTypes.DEAD, [toI, toJ]);
-      }
-    });
-
-    return changes;
+    addChanges(changeTypes.DAMAGE, [toI, toJ, this.damage]);
+    if (map[toI][toJ].character.hp <= 0) {
+      addChanges(changeTypes.DEAD, [toI, toJ]);
+    }
   }
 
   copy() {

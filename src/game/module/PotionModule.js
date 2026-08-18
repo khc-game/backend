@@ -15,27 +15,11 @@ export default class PotionModule extends Module {
     this.heal = heal;
   }
 
-  whereCanUse(map, player, fromI, fromJ) {
-    return new TargetingCalculator(
-      map,
-      fromI,
-      fromJ,
-      this.patterns,
-      this.filters,
-    );
-  }
-
-  use(map, player, fromI, fromJ, toI, toJ) {
-    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
-
-    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const currentHp = map[toI][toJ].character.hp;
-      map[toI][toJ].character.heal(this.heal);
-      const updateHp = map[toI][toJ].character.hp;
-      addChanges(changeTypes.HEAL, [toI, toJ, updateHp - currentHp]);
-    });
-
-    return changes;
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+    const currentHp = map[toI][toJ].character.hp;
+    map[toI][toJ].character.heal(this.heal);
+    const updateHp = map[toI][toJ].character.hp;
+    addChanges(changeTypes.HEAL, [toI, toJ, updateHp - currentHp]);
   }
 
   copy() {

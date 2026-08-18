@@ -15,38 +15,22 @@ export default class VampirismModule extends Module {
     this.blood = blood;
   }
 
-  whereCanUse(map, player, fromI, fromJ) {
-    return new TargetingCalculator(
-      map,
-      fromI,
-      fromJ,
-      this.patterns,
-      this.filters,
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+    const opponent = map[toI][toJ].character;
+    const character = map[fromI][fromJ].character;
+
+    const bloodForPlayer = Math.floor(
+      (opponent.hp < this.blood ? opponent.hp : this.blood) / 2,
     );
-  }
 
-  use(map, player, fromI, fromJ, toI, toJ) {
-    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
+    opponent.attacked(this.blood);
+    character.heal(bloodForPlayer);
 
-    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const opponent = map[toI][toJ].character;
-      const player = map[fromI][fromJ].character;
-
-      const bloodForPlayer = Math.floor(
-        (opponent.hp < this.blood ? opponent.hp : this.blood) / 2,
-      );
-
-      opponent.attacked(this.blood);
-      player.heal(bloodForPlayer);
-
-      addChanges(changeTypes.HEAL, [fromI, fromJ, bloodForPlayer]);
-      addChanges(changeTypes.DAMAGE, [toI, toJ, this.blood]);
-      if (opponent.hp <= 0) {
-        addChanges(changeTypes.DEAD, [toI, toJ]);
-      }
-    });
-
-    return changes;
+    addChanges(changeTypes.HEAL, [fromI, fromJ, bloodForPlayer]);
+    addChanges(changeTypes.DAMAGE, [toI, toJ, this.blood]);
+    if (opponent.hp <= 0) {
+      addChanges(changeTypes.DEAD, [toI, toJ]);
+    }
   }
 
   copy() {

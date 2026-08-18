@@ -14,32 +14,16 @@ export default class DivideModule extends Module {
     super("Divide", cooldown);
   }
 
-  whereCanUse(map, player, fromI, fromJ) {
-    return new TargetingCalculator(
-      map,
-      fromI,
-      fromJ,
-      this.patterns,
-      this.filters,
-    );
-  }
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+    const originalCharacter = map[fromI][fromJ].character;
+    const clonedCharacter = originalCharacter.clone();
 
-  use(map, player, fromI, fromJ, toI, toJ) {
-    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
+    clonedCharacter.hp = originalCharacter.maxHP;
+    clonedCharacter.maxHP = originalCharacter.maxHP;
 
-    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const originalCharacter = map[fromI][fromJ].character;
-      const clonedCharacter = originalCharacter.clone();
+    map[toI][toJ].character = clonedCharacter;
 
-      clonedCharacter.hp = originalCharacter.maxHP;
-      clonedCharacter.maxHP = originalCharacter.maxHP;
-
-      map[toI][toJ].character = clonedCharacter;
-
-      addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, clonedCharacter]);
-    });
-
-    return changes;
+    addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, clonedCharacter]);
   }
 
   copy() {

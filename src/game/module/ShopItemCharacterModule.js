@@ -47,19 +47,10 @@ export default class ShopItemCharacterModule extends IShopItemModule {
     return whereCanUse;
   }
 
-  use(map, player, fromI, fromJ, toI, toJ) {
-    const changes = findCaUseCollision(
-      this.whereCanUse(map, player, fromI, fromJ),
-      toI,
-      toJ,
-      (addChanges) => {
-        const character = new Character(this.title, player);
-        map[toI][toJ].character = character;
-        addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, character]);
-      },
-    );
-
-    return changes;
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+    const character = new Character(this.title, player);
+    map[toI][toJ].character = character;
+    addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, character]);
   }
 
   copy() {

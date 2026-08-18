@@ -1,6 +1,12 @@
 // libs
 import crypto from "crypto";
 
+// game
+import TargetingCalculator from "../../targetingCalculator/TargetingCalculator.js";
+
+// utils
+import findCanUseCollision from "../../../utils/findCanUseCollision.js";
+
 export default class IModule {
   constructor(title, cooldown = null) {
     this.id = crypto.randomUUID();
@@ -11,10 +17,26 @@ export default class IModule {
   }
 
   whereCanUse(map, player, fromI, fromJ) {
-    throw new Error("Must be implemented");
+    return new TargetingCalculator(
+      map,
+      fromI,
+      fromJ,
+      this.patterns,
+      this.filters,
+    );
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
+    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
+
+    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
+      this.useLogic(map, player, fromI, fromJ, toI, toJ, addChanges);
+    });
+
+    return changes;
+  }
+
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
     throw new Error("Must be implemented");
   }
 

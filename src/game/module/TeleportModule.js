@@ -27,18 +27,12 @@ export default class TeleportModule extends Module {
     return whereCanUse;
   }
 
-  use(map, player, fromI, fromJ, toI, toJ) {
-    const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+    const cellData = map[fromI][fromJ].character;
+    map[fromI][fromJ].character = null;
+    map[toI][toJ].character = cellData;
 
-    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      const cellData = map[fromI][fromJ].character;
-      map[fromI][fromJ].character = null;
-      map[toI][toJ].character = cellData;
-
-      addChanges(changeTypes.MOVE, [fromI, fromJ, toI, toJ]);
-    });
-
-    return changes;
+    addChanges(changeTypes.MOVE, [fromI, fromJ, toI, toJ]);
   }
 
   copy() {
