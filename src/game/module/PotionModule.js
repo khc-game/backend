@@ -3,7 +3,6 @@ import Module from "./interface/IModule.js";
 import TargetingCalculator from "../TargetingCalculator.js";
 
 // utils
-import getPersonsByRadius from "../../utils/getPersonsByRadius.js";
 import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
 // constants
