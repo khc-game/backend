@@ -2,7 +2,7 @@
 import crypto from "crypto";
 
 // game
-import Game from "../../game/game/Game.js";
+import Game from "../game/Game.js";
 
 export default class BattleService {
   static playerRoom = new Map();
