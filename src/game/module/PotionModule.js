@@ -1,5 +1,6 @@
 // game
 import Module from "./interface/IModule.js";
+import TargetingCalculator from "../targetingCalculator/TargetingCalculator.js";
 
 // utils
 import getPersonsByRadius from "../../utils/getPersonsByRadius.js";
@@ -9,18 +10,19 @@ import findCanUseCollision from "../../utils/findCanUseCollision.js";
 import changeTypes from "../../constants/changeTypes.js";
 
 export default class PotionModule extends Module {
-  radius = null;
-  heal = null;
-
-  constructor(heal, radius, cooldown) {
+  constructor(heal, cooldown) {
     super("Potion", cooldown);
     this.heal = heal;
-    this.radius = radius;
   }
 
   whereCanUse(map, player, fromI, fromJ) {
-    const personsPoses = getPersonsByRadius(map, fromI, fromJ, this.radius);
-    return personsPoses.filter((pos) => map[pos[0]][pos[1]].character.hp > 1);
+    return new TargetingCalculator(
+      map,
+      fromI,
+      fromJ,
+      this.patterns,
+      this.filters,
+    );
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
@@ -37,6 +39,9 @@ export default class PotionModule extends Module {
   }
 
   copy() {
-    return new PotionModule(this.heal, this.radius, this.cooldown);
+    const copy = new PotionModule(this.heal, this.radius, this.cooldown);
+    copy.patterns = this.patterns;
+    copy.filters = this.filters;
+    return copy;
   }
 }

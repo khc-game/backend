@@ -1,5 +1,6 @@
 // game
 import Module from "./interface/IModule.js";
+import TargetingCalculator from "../targetingCalculator/TargetingCalculator.js";
 
 // utils
 import getByRadius from "../../utils/getByRadius.js";
@@ -14,79 +15,37 @@ export default class DivideModule extends Module {
   }
 
   whereCanUse(map, player, fromI, fromJ) {
-    const dist = [
-      [0, 1],
-      [0, -1],
-      [1, 0],
-      [-1, 0],
-    ];
-
-    const whereCanUse = [];
-
-    for (let i = 0; i < dist.length; ++i) {
-      const [mx, my] = dist[i];
-
-      const nx = fromI + mx;
-      const ny = fromJ + my;
-
-      const cell = map[nx]?.[ny];
-
-      if (cell && cell?.character === null) {
-        return [[fromI, fromJ]];
-      }
-    }
-
-    return [];
+    return new TargetingCalculator(
+      map,
+      fromI,
+      fromJ,
+      this.patterns,
+      this.filters,
+    );
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
-    if (canUseAt.length === 0) return [];
 
-    const dist = [
-      [0, 1],
-      [0, -1],
-      [1, 0],
-      [-1, 0],
-    ];
+    const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
+      const originalCharacter = map[fromI][fromJ].character;
+      const clonedCharacter = originalCharacter.clone();
 
-    const whereCanUse = [];
+      clonedCharacter.hp = originalCharacter.maxHP;
+      clonedCharacter.maxHP = originalCharacter.maxHP;
 
-    for (let i = 0; i < dist.length; ++i) {
-      const [mx, my] = dist[i];
+      map[toI][toJ].character = clonedCharacter;
 
-      const nx = fromI + mx;
-      const ny = fromJ + my;
-
-      const cell = map[nx]?.[ny];
-
-      if (cell && cell?.character === null) {
-        whereCanUse.push([nx, ny]);
-      }
-    }
-
-    const changes = [];
-
-    const randomInd = Math.floor(Math.random() * whereCanUse.length);
-    const [i, j] = whereCanUse[randomInd];
-
-    const originalCharacter = map[fromI][fromJ].character;
-    const clonedCharacter = originalCharacter.clone();
-
-    clonedCharacter.hp = originalCharacter.maxHP;
-    clonedCharacter.maxHP = originalCharacter.maxHP;
-
-    map[i][j].character = clonedCharacter;
-
-    changes.push({
-      changeType: changeTypes.SPAWN_CHARACTER,
-      data: [i, j, clonedCharacter],
+      addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, clonedCharacter]);
     });
 
     return changes;
   }
 
   copy() {
-    return new DivideModule(this.cooldown);
+    const copy = new DivideModule(this.cooldown);
+    copy.patterns = this.patterns;
+    copy.filters = this.filters;
+    return copy;
   }
 }

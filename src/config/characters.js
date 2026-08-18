@@ -5,7 +5,6 @@ import VampirismModule from "../game/module/VampirismModule.js";
 import TeleportModule from "../game/module/TeleportModule.js";
 import PotionModule from "../game/module/PotionModule.js";
 import DivideModule from "../game/module/DivideModule.js";
-import BuffModule from "../game/module/BuffModule.js";
 import ShopItemCharacterModule from "../game/module/ShopItemCharacterModule.js";
 
 // patterns
@@ -19,6 +18,7 @@ export const characters = {
     name: "Test",
     hp: 10,
     cost: 1,
+    shop: ["Shop", 0, 1],
     modules: [
       new MoveModule().addPattern(
         new PatternRadius(2, new Rule().setCharacter(false, true)),
@@ -26,6 +26,17 @@ export const characters = {
       new AttackModule(10).addPattern(
         new PatternRadius(4, new Rule().setCharacter(true, true)),
       ),
+      new VampirismModule(5, 1).addPattern(
+        new PatternRadius(2, new Rule().setCharacter(true, true)),
+      ),
+      new TeleportModule(1),
+      new PotionModule(10, 1).addPattern(
+        new PatternRadius(3, new Rule().setCharacter(true, false)),
+      ),
+      new DivideModule(1).addPattern(
+        new PatternRadius(1, new Rule().setCharacter(false, true)),
+      ),
+      new ShopItemCharacterModule("test", 1),
     ],
   },
 

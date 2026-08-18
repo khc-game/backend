@@ -1,5 +1,6 @@
 // game
 import Module from "./interface/IModule.js";
+import TargetingCalculator from "../targetingCalculator/TargetingCalculator.js";
 
 // utils
 import getPersonsByRadius from "../../utils/getPersonsByRadius.js";
@@ -9,17 +10,19 @@ import findCanUseCollision from "../../utils/findCanUseCollision.js";
 import changeTypes from "../../constants/changeTypes.js";
 
 export default class VampirismModule extends Module {
-  blood = null;
-  radius = null;
-
-  constructor(blood, radius, cooldown) {
+  constructor(blood, cooldown) {
     super("Vampirism", cooldown);
     this.blood = blood;
-    this.radius = radius;
   }
 
   whereCanUse(map, player, fromI, fromJ) {
-    return getPersonsByRadius(map, fromI, fromJ, this.radius);
+    return new TargetingCalculator(
+      map,
+      fromI,
+      fromJ,
+      this.patterns,
+      this.filters,
+    );
   }
 
   use(map, player, fromI, fromJ, toI, toJ) {
@@ -47,6 +50,9 @@ export default class VampirismModule extends Module {
   }
 
   copy() {
-    return new VampirismModule(this.blood, this.radius, this.cooldown);
+    const copy = new VampirismModule(this.blood, this.radius, this.cooldown);
+    copy.patterns = this.patterns;
+    copy.filters = this.filters;
+    return copy;
   }
 }
