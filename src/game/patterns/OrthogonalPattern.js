@@ -37,8 +37,6 @@ export default class OrthogonalPattern extends IPattern {
 
         if (cell) {
           if (cell.character) {
-            console.log(cell.character);
-
             if (characterRule.include) {
               availableSlots.push([nI, nJ]);
             }

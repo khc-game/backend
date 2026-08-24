@@ -42,15 +42,17 @@ export default class DiagonalPattern extends IPattern {
               availableSlots.push([nI, nJ]);
             }
 
-            if (!characterRule.stop) {
+            if (characterRule.stop) {
               pointers[i][2] = true;
             }
           } else {
             availableSlots.push([nI, nJ]);
           }
 
-          pointers[i][0] += dists[i][0];
-          pointers[i][1] += dists[i][1];
+          if (pointers[i][2] === false) {
+            pointers[i][0] += dists[i][0];
+            pointers[i][1] += dists[i][1];
+          }
         }
       }
 
