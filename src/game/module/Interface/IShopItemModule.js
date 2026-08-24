@@ -1,6 +1,6 @@
-import Module from "./IModule.js";
+import IModule from "./IModule.js";
 
-export default class IShopItemModule extends Module {
+export default class IShopItemModule extends IModule {
   static types = { player: "player" };
 
   constructor(title, cost, type, cooldown = null) {
