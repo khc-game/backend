@@ -56,13 +56,13 @@ export default class IModule {
   // if need do something
   afterMove(map, playerId, fromI, fromJ, changes) {}
 
-  addPattern(pattern) {
-    this.patterns.push(pattern);
+  addPattern(...patterns) {
+    this.patterns = [...this.patterns, ...patterns];
     return this;
   }
 
-  addFilters(filter) {
-    this.filters.push(filter);
+  addFilters(...filters) {
+    this.filters = [...this.filters, ...filters];
     return this;
   }
 }

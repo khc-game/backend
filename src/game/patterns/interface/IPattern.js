@@ -4,7 +4,7 @@ export default class IPattern {
     this.rule = rule;
   }
 
-  calculate(map, i, j) {
+  calculate(map, fromI, fromJ) {
     throw new Error("Must be implement");
   }
 }
