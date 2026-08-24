@@ -26,17 +26,26 @@ export default class IModule {
     );
   }
 
-  use(map, player, fromI, fromJ, toI, toJ) {
+  use(map, player, fromI, fromJ, toI, toJ, isFirstPlayer) {
     const canUseAt = this.whereCanUse(map, player, fromI, fromJ);
 
     const changes = findCanUseCollision(canUseAt, toI, toJ, (addChanges) => {
-      this.useLogic(map, player, fromI, fromJ, toI, toJ, addChanges);
+      this.useLogic(
+        map,
+        player,
+        fromI,
+        fromJ,
+        toI,
+        toJ,
+        addChanges,
+        isFirstPlayer,
+      );
     });
 
     return changes;
   }
 
-  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     throw new Error("Must be implemented");
   }
 

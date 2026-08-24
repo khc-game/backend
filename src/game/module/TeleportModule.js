@@ -27,7 +27,7 @@ export default class TeleportModule extends Module {
     return whereCanUse;
   }
 
-  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     const cellData = map[fromI][fromJ].character;
     map[fromI][fromJ].character = null;
     map[toI][toJ].character = cellData;

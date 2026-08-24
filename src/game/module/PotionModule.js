@@ -14,7 +14,7 @@ export default class PotionModule extends Module {
     this.heal = heal;
   }
 
-  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     const currentHp = map[toI][toJ].character.hp;
     map[toI][toJ].character.heal(this.heal);
     const updateHp = map[toI][toJ].character.hp;

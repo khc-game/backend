@@ -13,7 +13,7 @@ export default class DivideModule extends Module {
     super("Divide", cooldown);
   }
 
-  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     const originalCharacter = map[fromI][fromJ].character;
     const clonedCharacter = originalCharacter.clone();
 

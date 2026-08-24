@@ -47,7 +47,7 @@ export default class ShopItemCharacterModule extends IShopItemModule {
     return whereCanUse;
   }
 
-  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     const character = new Character(this.title, player);
     map[toI][toJ].character = character;
     addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, character]);

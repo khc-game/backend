@@ -14,7 +14,7 @@ export default class VampirismModule extends Module {
     this.blood = blood;
   }
 
-  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges) {
+  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     const opponent = map[toI][toJ].character;
     const character = map[fromI][fromJ].character;
 

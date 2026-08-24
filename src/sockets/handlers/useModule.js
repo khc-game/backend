@@ -33,15 +33,32 @@ export default async function useModule(io, socket, args) {
   // use module
   let changes = [];
 
+  const isFirstPlayer = socket.id === game.p1[0];
   if (module.isShopItem) {
     if (character.shop[1] >= module.cost) {
       character.shop[1] -= module.cost;
-      changes = module.use(game.map, socket.id, fromI, fromJ, toI, toJ);
+      changes = module.use(
+        game.map,
+        socket.id,
+        fromI,
+        fromJ,
+        toI,
+        toJ,
+        isFirstPlayer,
+      );
     } else {
       return;
     }
   } else {
-    changes = module.use(game.map, socket.id, fromI, fromJ, toI, toJ);
+    changes = module.use(
+      game.map,
+      socket.id,
+      fromI,
+      fromJ,
+      toI,
+      toJ,
+      isFirstPlayer,
+    );
   }
 
   // set cooldown
