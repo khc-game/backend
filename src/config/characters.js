@@ -43,10 +43,12 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
+        new OrthogonalPattern(3, new Rule().setCharacter(false, true)),
+        new DiagonalPattern(5, new Rule().setCharacter(false, true)),
       ),
-      new AttackModule(5).addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
+      new AttackModule(50).addPattern(
+        new OrthogonalPattern(7, new Rule().setCharacter(true, true)),
+        new DiagonalPattern(7, new Rule().setCharacter(true, true)),
       ),
     ],
   },
@@ -59,7 +61,7 @@ export const characters = {
       new MoveModule().addPattern(
         new OrthogonalPattern(5, new Rule().setCharacter(false, true)),
       ),
-      new AttackModule(5).addPattern(
+      new AttackModule(40).addPattern(
         new OrthogonalPattern(5, new Rule().setCharacter(true, true)),
       ),
     ],
@@ -73,8 +75,8 @@ export const characters = {
       new MoveModule().addPattern(
         new DiagonalPattern(1, new Rule().setCharacter(false, true)),
       ),
-      new AttackModule(5).addPattern(
-        new DiagonalPattern(30, new Rule().setCharacter(true, true)),
+      new AttackModule(30).addPattern(
+        new DiagonalPattern(3, new Rule().setCharacter(true, true)),
       ),
     ],
   },
