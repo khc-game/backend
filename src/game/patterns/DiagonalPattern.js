@@ -10,7 +10,7 @@ export default class DiagonalPattern extends IPattern {
     const dists = [
       [1, 1],
       [1, -1],
-      [1, 1],
+      [-1, -1],
       [-1, 1],
     ];
 
