@@ -9,7 +9,8 @@ import DivideModule from "../game/module/DivideModule.js";
 import ShopItemCharacterModule from "../game/module/ShopItemCharacterModule.js";
 
 // patterns
-import PatternRadius from "../game/patterns/PatternRadius.js";
+import PatternRadiusPattern from "../game/patterns/PatternRadiusPattern.js";
+import KnightPattern from "../game/patterns/KnightPattern.js";
 
 // rule
 import Rule from "../game/Rule.js";
@@ -19,13 +20,13 @@ export const characters = {
     name: "Kingy",
     hp: 100,
     cost: 5,
-    shop: ["Figure's Shop", 7, 1],
+    shop: ["Figure's Shop", 100, 1],
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(5).addPattern(
-        new PatternRadius(1, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
       ),
       new ShopItemCharacterModule("chess_pawn", 1),
       new ShopItemCharacterModule("chess_knight", 2),
@@ -40,10 +41,10 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(5).addPattern(
-        new PatternRadius(1, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
       ),
     ],
   },
@@ -54,10 +55,10 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(5).addPattern(
-        new PatternRadius(1, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
       ),
     ],
   },
@@ -68,10 +69,10 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(5).addPattern(
-        new PatternRadius(1, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
       ),
     ],
   },
@@ -82,10 +83,10 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(1, new Rule().setCharacter(false, true)),
+        new KnightPattern(new Rule().setCharacter(false)),
       ),
-      new AttackModule(5).addPattern(
-        new PatternRadius(1, new Rule().setCharacter(true, true)),
+      new AttackModule(30).addPattern(
+        new KnightPattern(new Rule().setCharacter(true)),
       ),
     ],
   },
@@ -96,10 +97,10 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MovePawnModule().addPattern(
-        new PatternRadius(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(5).addPattern(
-        new PatternRadius(1, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
       ),
     ],
   },
@@ -110,10 +111,10 @@ export const characters = {
     cost: 1,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(3, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(3, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(75).addPattern(
-        new PatternRadius(3, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(3, new Rule().setCharacter(true, true)),
       ),
     ],
   },
@@ -124,10 +125,10 @@ export const characters = {
     cost: 5,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(40).addPattern(
-        new PatternRadius(2, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(2, new Rule().setCharacter(true, true)),
       ),
     ],
   },
@@ -138,10 +139,10 @@ export const characters = {
     cost: 2,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(4, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(4, new Rule().setCharacter(false, true)),
       ),
       new VampirismModule(20, 1).addPattern(
-        new PatternRadius(1, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
       ),
     ],
   },
@@ -152,10 +153,10 @@ export const characters = {
     cost: 2,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(2, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(2, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(10).addPattern(
-        new PatternRadius(3, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(3, new Rule().setCharacter(true, true)),
       ),
       new TeleportModule(1),
     ],
@@ -167,13 +168,13 @@ export const characters = {
     cost: 4,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadius(2, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(2, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(10).addPattern(
-        new PatternRadius(2, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(2, new Rule().setCharacter(true, true)),
       ),
       new PotionModule(10, 2).addPattern(
-        new PatternRadius(3, new Rule().setCharacter(true, false)),
+        new PatternRadiusPattern(3, new Rule().setCharacter(true, false)),
       ),
     ],
   },
@@ -184,10 +185,10 @@ export const characters = {
     cost: 1,
     modules: [
       new AttackModule(5).addPattern(
-        new PatternRadius(2, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(2, new Rule().setCharacter(true, true)),
       ),
       new DivideModule(1).addPattern(
-        new PatternRadius(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
       ),
     ],
   },

@@ -1,7 +1,7 @@
 // pattern
 import IPattern from "./interface/IPattern.js";
 
-export default class PatternRadius extends IPattern {
+export default class PatternRadiusPattern extends IPattern {
   constructor(radius, rule) {
     super(radius, rule);
   }
