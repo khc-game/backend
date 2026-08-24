@@ -22,7 +22,7 @@ export const characters = {
     name: "Kingy",
     hp: 100,
     cost: 5,
-    shop: ["Figure's Shop", 100, 1],
+    shop: ["Figure's Shop", 0, 1],
     modules: [
       new MoveModule().addPattern(
         new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
@@ -73,7 +73,7 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new DiagonalPattern(1, new Rule().setCharacter(false, true)),
+        new DiagonalPattern(3, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(30).addPattern(
         new DiagonalPattern(3, new Rule().setCharacter(true, true)),
