@@ -61,7 +61,7 @@ export default class IModule {
     return this;
   }
 
-  addFilters(...filters) {
+  addFilter(...filters) {
     this.filters = [...this.filters, ...filters];
     return this;
   }
