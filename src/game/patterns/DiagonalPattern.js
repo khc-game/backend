@@ -37,9 +37,6 @@ export default class DiagonalPattern extends IPattern {
         const cell = map[nI]?.[nJ];
 
         if (cell) {
-          pointers[i][0] += dists[i][0];
-          pointers[i][1] += dists[i][1];
-
           if (cell.character) {
             if (characterRule.include) {
               availableSlots.push([nI, nJ]);
@@ -52,7 +49,8 @@ export default class DiagonalPattern extends IPattern {
             availableSlots.push([nI, nJ]);
           }
 
-          availableSlots.push([nI, nJ]);
+          pointers[i][0] += dists[i][0];
+          pointers[i][1] += dists[i][1];
         }
       }
 

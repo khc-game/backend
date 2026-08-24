@@ -12,6 +12,7 @@ import ShopItemCharacterModule from "../game/module/ShopItemCharacterModule.js";
 import PatternRadiusPattern from "../game/patterns/PatternRadiusPattern.js";
 import KnightPattern from "../game/patterns/KnightPattern.js";
 import DiagonalPattern from "../game/patterns/DiagonalPattern.js";
+import OrthogonalPattern from "../game/patterns/OrthogonalPattern.js";
 
 // rule
 import Rule from "../game/Rule.js";
@@ -56,10 +57,10 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
+        new OrthogonalPattern(5, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(5).addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
+        new OrthogonalPattern(5, new Rule().setCharacter(true, true)),
       ),
     ],
   },
