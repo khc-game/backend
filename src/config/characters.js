@@ -96,7 +96,7 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MovePawnModule().addPattern(
-        new PatternRadius(5, new Rule().setCharacter(false, true)),
+        new PatternRadius(1, new Rule().setCharacter(false, true)),
       ),
       new AttackModule(5).addPattern(
         new PatternRadius(1, new Rule().setCharacter(true, true)),
