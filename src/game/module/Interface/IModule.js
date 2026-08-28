@@ -19,6 +19,7 @@ export default class IModule {
   whereCanUse(map, player, fromI, fromJ) {
     return new TargetingCalculator(
       map,
+      player,
       fromI,
       fromJ,
       this.patterns,

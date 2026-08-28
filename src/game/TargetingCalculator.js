@@ -1,5 +1,5 @@
 export default class TargetingCalculator {
-  constructor(map, fromI, fromJ, patterns, filters) {
+  constructor(map, player, fromI, fromJ, patterns, filters) {
     let availableMoves = [];
 
     for (let i = 0; i < patterns.length; ++i) {
