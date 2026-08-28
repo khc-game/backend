@@ -1,5 +1,5 @@
 export default class TargetingCalculator {
-  constructor(map, player, fromI, fromJ, patterns, filters) {
+  constructor(map, playerId, fromI, fromJ, patterns, filters) {
     let availableMoves = [];
 
     for (let i = 0; i < patterns.length; ++i) {
@@ -13,6 +13,7 @@ export default class TargetingCalculator {
       for (let i = 0; i < filters.length; ++i) {
         availableMoves = filters[i].calculate(
           map,
+          playerId,
           availableMoves,
           fromI,
           fromJ,

@@ -1,11 +1,11 @@
 export default class FilterRule {
   constructor() {
-    this.character = { include: false };
+    this.character = { include: false, teammate: false, enemy: false };
     this.cell = { include: false };
   }
 
-  setCharacter(include = false) {
-    this.character = { include };
+  setCharacter(include = false, teammate = false, enemy = false) {
+    this.character = { include, teammate, enemy };
     return this;
   }
 

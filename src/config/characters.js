@@ -35,7 +35,9 @@ export const characters = {
         .addPattern(
           new RadiusPattern(1, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, false)),
+        ),
       new ShopItemCharacterModule("chess_pawn", 1),
       new ShopItemCharacterModule("chess_knight", 2),
       new ShopItemCharacterModule("chess_bishop", 3),
@@ -57,7 +59,9 @@ export const characters = {
           new OrthogonalPattern(7, new PatternRule().setCharacter(true, true)),
           new DiagonalPattern(7, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
     ],
   },
 
@@ -73,7 +77,9 @@ export const characters = {
         .addPattern(
           new OrthogonalPattern(5, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
     ],
   },
 
@@ -89,7 +95,9 @@ export const characters = {
         .addPattern(
           new DiagonalPattern(3, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
     ],
   },
 
@@ -103,7 +111,9 @@ export const characters = {
       ),
       new AttackModule(30)
         .addPattern(new KnightPattern(new PatternRule().setCharacter(true)))
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
     ],
   },
 
@@ -119,7 +129,9 @@ export const characters = {
         .addPattern(
           new RadiusPattern(1, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
     ],
   },
 
@@ -135,7 +147,9 @@ export const characters = {
         .addPattern(
           new RadiusPattern(3, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
     ],
   },
 
@@ -151,7 +165,9 @@ export const characters = {
         .addPattern(
           new RadiusPattern(2, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
     ],
   },
 
@@ -167,7 +183,7 @@ export const characters = {
         .addPattern(
           new RadiusPattern(1, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(new Filter(new FilterRule().setCharacter(true, true, true))),
     ],
   },
 
@@ -179,9 +195,13 @@ export const characters = {
       new MoveModule().addPattern(
         new RadiusPattern(2, new PatternRule().setCharacter(false, true)),
       ),
-      new AttackModule(10).addPattern(
-        new RadiusPattern(3, new PatternRule().setCharacter(true, true)),
-      ),
+      new AttackModule(10)
+        .addPattern(
+          new RadiusPattern(3, new PatternRule().setCharacter(true, true)),
+        )
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
       new TeleportModule(1),
     ],
   },
@@ -198,12 +218,16 @@ export const characters = {
         .addPattern(
           new RadiusPattern(2, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
       new PotionModule(10, 2)
         .addPattern(
           new RadiusPattern(3, new PatternRule().setCharacter(true, false)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, true, false)),
+        ),
     ],
   },
 
@@ -216,7 +240,9 @@ export const characters = {
         .addPattern(
           new RadiusPattern(2, new PatternRule().setCharacter(true, true)),
         )
-        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
       new DivideModule(1).addPattern(
         new RadiusPattern(1, new PatternRule().setCharacter(false, true)),
       ),

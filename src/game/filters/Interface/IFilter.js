@@ -3,7 +3,7 @@ export default class IFilter {
     this.rule = rule;
   }
 
-  calculate(map, positions, fromI, fromJ) {
+  calculate(map, playerId, positions, fromI, fromJ) {
     throw new Error("Must be implement");
   }
 }
