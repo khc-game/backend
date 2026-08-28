@@ -14,8 +14,12 @@ import KnightPattern from "../game/patterns/KnightPattern.js";
 import DiagonalPattern from "../game/patterns/DiagonalPattern.js";
 import OrthogonalPattern from "../game/patterns/OrthogonalPattern.js";
 
+// filter
+import Filter from "../game/filters/Filter.js";
+
 // rule
-import Rule from "../game/Rule.js";
+import PatternRule from "../game/rules/PatternRule.js";
+import FilterRule from "../game/rules/FilterRule.js";
 
 export const characters = {
   chess_king: {
@@ -25,11 +29,19 @@ export const characters = {
     shop: ["Figure's Shop", 0, 1],
     modules: [
       new MoveModule().addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(
+          1,
+          new PatternRule().setCharacter(false, true),
+        ),
       ),
-      new AttackModule(5).addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
-      ),
+      new AttackModule(5)
+        .addPattern(
+          new PatternRadiusPattern(
+            1,
+            new PatternRule().setCharacter(true, true),
+          ),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
       new ShopItemCharacterModule("chess_pawn", 1),
       new ShopItemCharacterModule("chess_knight", 2),
       new ShopItemCharacterModule("chess_bishop", 3),
@@ -43,13 +55,15 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new OrthogonalPattern(3, new Rule().setCharacter(false, true)),
-        new DiagonalPattern(5, new Rule().setCharacter(false, true)),
+        new OrthogonalPattern(3, new PatternRule().setCharacter(false, true)),
+        new DiagonalPattern(5, new PatternRule().setCharacter(false, true)),
       ),
-      new AttackModule(50).addPattern(
-        new OrthogonalPattern(7, new Rule().setCharacter(true, true)),
-        new DiagonalPattern(7, new Rule().setCharacter(true, true)),
-      ),
+      new AttackModule(50)
+        .addPattern(
+          new OrthogonalPattern(7, new PatternRule().setCharacter(true, true)),
+          new DiagonalPattern(7, new PatternRule().setCharacter(true, true)),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -59,11 +73,13 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new OrthogonalPattern(5, new Rule().setCharacter(false, true)),
+        new OrthogonalPattern(5, new PatternRule().setCharacter(false, true)),
       ),
-      new AttackModule(40).addPattern(
-        new OrthogonalPattern(5, new Rule().setCharacter(true, true)),
-      ),
+      new AttackModule(40)
+        .addPattern(
+          new OrthogonalPattern(5, new PatternRule().setCharacter(true, true)),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -73,11 +89,13 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new DiagonalPattern(3, new Rule().setCharacter(false, true)),
+        new DiagonalPattern(3, new PatternRule().setCharacter(false, true)),
       ),
-      new AttackModule(30).addPattern(
-        new DiagonalPattern(3, new Rule().setCharacter(true, true)),
-      ),
+      new AttackModule(30)
+        .addPattern(
+          new DiagonalPattern(3, new PatternRule().setCharacter(true, true)),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -87,11 +105,11 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MoveModule().addPattern(
-        new KnightPattern(new Rule().setCharacter(false)),
+        new KnightPattern(new PatternRule().setCharacter(false)),
       ),
-      new AttackModule(30).addPattern(
-        new KnightPattern(new Rule().setCharacter(true)),
-      ),
+      new AttackModule(30)
+        .addPattern(new KnightPattern(new PatternRule().setCharacter(true)))
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -101,11 +119,19 @@ export const characters = {
     cantSelect: true,
     modules: [
       new MovePawnModule().addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(
+          1,
+          new PatternRule().setCharacter(false, true),
+        ),
       ),
-      new AttackModule(5).addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
-      ),
+      new AttackModule(5)
+        .addPattern(
+          new PatternRadiusPattern(
+            1,
+            new PatternRule().setCharacter(true, true),
+          ),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -115,11 +141,19 @@ export const characters = {
     cost: 1,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadiusPattern(3, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(
+          3,
+          new PatternRule().setCharacter(false, true),
+        ),
       ),
-      new AttackModule(75).addPattern(
-        new PatternRadiusPattern(3, new Rule().setCharacter(true, true)),
-      ),
+      new AttackModule(75)
+        .addPattern(
+          new PatternRadiusPattern(
+            3,
+            new PatternRule().setCharacter(true, true),
+          ),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -129,11 +163,19 @@ export const characters = {
     cost: 5,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(
+          1,
+          new PatternRule().setCharacter(false, true),
+        ),
       ),
-      new AttackModule(40).addPattern(
-        new PatternRadiusPattern(2, new Rule().setCharacter(true, true)),
-      ),
+      new AttackModule(40)
+        .addPattern(
+          new PatternRadiusPattern(
+            2,
+            new PatternRule().setCharacter(true, true),
+          ),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -143,11 +185,19 @@ export const characters = {
     cost: 2,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadiusPattern(4, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(
+          4,
+          new PatternRule().setCharacter(false, true),
+        ),
       ),
-      new VampirismModule(20, 1).addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(true, true)),
-      ),
+      new VampirismModule(20, 1)
+        .addPattern(
+          new PatternRadiusPattern(
+            1,
+            new PatternRule().setCharacter(true, true),
+          ),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -157,10 +207,13 @@ export const characters = {
     cost: 2,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadiusPattern(2, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(
+          2,
+          new PatternRule().setCharacter(false, true),
+        ),
       ),
       new AttackModule(10).addPattern(
-        new PatternRadiusPattern(3, new Rule().setCharacter(true, true)),
+        new PatternRadiusPattern(3, new PatternRule().setCharacter(true, true)),
       ),
       new TeleportModule(1),
     ],
@@ -172,14 +225,27 @@ export const characters = {
     cost: 4,
     modules: [
       new MoveModule().addPattern(
-        new PatternRadiusPattern(2, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(
+          2,
+          new PatternRule().setCharacter(false, true),
+        ),
       ),
-      new AttackModule(10).addPattern(
-        new PatternRadiusPattern(2, new Rule().setCharacter(true, true)),
-      ),
-      new PotionModule(10, 2).addPattern(
-        new PatternRadiusPattern(3, new Rule().setCharacter(true, false)),
-      ),
+      new AttackModule(10)
+        .addPattern(
+          new PatternRadiusPattern(
+            2,
+            new PatternRule().setCharacter(true, true),
+          ),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
+      new PotionModule(10, 2)
+        .addPattern(
+          new PatternRadiusPattern(
+            3,
+            new PatternRule().setCharacter(true, false),
+          ),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
     ],
   },
 
@@ -188,11 +254,19 @@ export const characters = {
     hp: 10,
     cost: 1,
     modules: [
-      new AttackModule(5).addPattern(
-        new PatternRadiusPattern(2, new Rule().setCharacter(true, true)),
-      ),
+      new AttackModule(5)
+        .addPattern(
+          new PatternRadiusPattern(
+            2,
+            new PatternRule().setCharacter(true, true),
+          ),
+        )
+        .addFilter(new Filter(new FilterRule().setCharacter(true))),
       new DivideModule(1).addPattern(
-        new PatternRadiusPattern(1, new Rule().setCharacter(false, true)),
+        new PatternRadiusPattern(
+          1,
+          new PatternRule().setCharacter(false, true),
+        ),
       ),
     ],
   },

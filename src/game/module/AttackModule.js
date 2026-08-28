@@ -1,5 +1,5 @@
 // game
-import Module from "./interface/IModule.js";
+import IModule from "./interface/IModule.js";
 import TargetingCalculator from "../TargetingCalculator.js";
 
 // utils
@@ -8,7 +8,7 @@ import findCanUseCollision from "../../utils/findCanUseCollision.js";
 // constants
 import changeTypes from "../../constants/changeTypes.js";
 
-export default class AttackModule extends Module {
+export default class AttackModule extends IModule {
   constructor(damage) {
     super("Attack");
     this.damage = damage;

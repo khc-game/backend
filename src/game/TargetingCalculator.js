@@ -11,10 +11,12 @@ export default class TargetingCalculator {
 
     if (filters.length > 0) {
       for (let i = 0; i < filters.length; ++i) {
-        availableMoves = [
-          ...availableMoves,
-          // ...filters[i].calculate(),
-        ];
+        availableMoves = filters[i].calculate(
+          map,
+          availableMoves,
+          fromI,
+          fromJ,
+        );
       }
     }
 
