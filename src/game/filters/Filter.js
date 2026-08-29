@@ -28,8 +28,6 @@ export default class Filter extends IFilter {
           ) {
             result.push(position);
           }
-
-          result.push(position);
         }
       } else {
         if (isCellIncludeRule) {

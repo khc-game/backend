@@ -31,7 +31,7 @@ export default class Game {
     // create map
     this.map = [];
 
-    const mapSize = 5;
+    const mapSize = 8;
     for (let i = 0; i < mapSize; ++i) {
       const line = [];
       for (let j = 0; j < mapSize; ++j) {
