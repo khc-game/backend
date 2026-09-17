@@ -162,7 +162,7 @@ export default class Game {
     }
   }
 
-  isOpponentCanUseModule(socket, fromI, fromJ) {
+  isOpponentCanUseModule(fromI, fromJ) {
     const playerCharacters = this.turn === this.p1[0] ? this.p1[1] : this.p2[1];
     for (let i = 0; i < playerCharacters.length; ++i) {
       const character = playerCharacters[i];
@@ -171,7 +171,7 @@ export default class Game {
         const module = modules[i];
 
         const cooldown = this.cooldown;
-        if (cooldown.has(socket.id, module.id)) continue;
+        if (cooldown.has(module.id)) continue;
 
         const whereCanUse = module.whereCanUse(
           this.map,

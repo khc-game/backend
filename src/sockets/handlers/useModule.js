@@ -28,7 +28,7 @@ export default async function useModule(io, socket, args) {
 
   // check cooldown
   const cooldown = game.cooldown;
-  if (cooldown.has(socket.id, module.title)) return;
+  if (cooldown.has(module.title)) return;
 
   // use module
   let changes = [];
@@ -64,7 +64,7 @@ export default async function useModule(io, socket, args) {
   // set cooldown
   cooldown.countDownForCurrentPlayer(socket.id);
   if (module.cooldown) {
-    cooldown.add(socket.id, module.id, module.cooldown);
+    cooldown.add(module.id, module.cooldown);
   }
 
   // call after turn
@@ -75,7 +75,7 @@ export default async function useModule(io, socket, args) {
 
   // check dead characters
   const isHasDiedChar = game.tryToClearDiedCharacters();
-  const isCanOpponentMove = game.isOpponentCanUseModule(socket, fromI, fromJ);
+  const isCanOpponentMove = game.isOpponentCanUseModule(fromI, fromJ);
 
   if (!isCanOpponentMove) {
     io.to(room).emit("end:draw:opponentDontHasMove", { opponent: game.turn });

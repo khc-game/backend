@@ -5,11 +5,11 @@ export default class Cooldown {
     this.cooldowns = {};
   }
 
-  add(socketId, moduleId, cooldown) {
+  add(moduleId, cooldown) {
     this.cooldowns[moduleId] = cooldown;
   }
 
-  has(socketId, moduleId) {
+  has(moduleId) {
     return moduleId in this.cooldowns;
   }
 

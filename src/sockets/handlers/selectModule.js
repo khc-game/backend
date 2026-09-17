@@ -28,7 +28,7 @@ export default async function selectModule(io, socket, args) {
 
   // check module's cooldown
   const cooldown = game.cooldown;
-  if (cooldown.has(socket.id, module.id)) return;
+  if (cooldown.has(module.id)) return;
 
   // check shop
   if (module.isShopItem) {
