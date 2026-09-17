@@ -38,10 +38,10 @@ export const characters = {
         .addFilter(
           new Filter(new FilterRule().setCharacter(true, false, false)),
         ),
-      new ShopItemCharacterModule("chess_pawn", 1),
-      new ShopItemCharacterModule("chess_knight", 2),
-      new ShopItemCharacterModule("chess_bishop", 3),
-      new ShopItemCharacterModule("chess_rook", 4),
+      new ShopItemCharacterModule("chess_pawn", 2),
+      new ShopItemCharacterModule("chess_knight", 3),
+      new ShopItemCharacterModule("chess_bishop", 4),
+      new ShopItemCharacterModule("chess_rook", 5),
     ],
   },
 
