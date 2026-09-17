@@ -161,4 +161,30 @@ export default class Game {
       }
     }
   }
+
+  isOpponentCanUseModule(socket, fromI, fromJ) {
+    const playerCharacters = this.turn === this.p1[0] ? this.p1[1] : this.p2[1];
+    for (let i = 0; i < playerCharacters.length; ++i) {
+      const character = playerCharacters[i];
+      const modules = character.modules;
+      for (let j = 0; j < modules.length; ++j) {
+        const module = modules[i];
+
+        const cooldown = this.cooldown;
+        if (cooldown.has(socket.id, module.id)) continue;
+
+        const whereCanUse = module.whereCanUse(
+          this.map,
+          this.turn,
+          fromI,
+          fromJ,
+        );
+        if (whereCanUse.length > 0) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
 }
