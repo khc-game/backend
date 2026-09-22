@@ -7,6 +7,7 @@ import TeleportModule from "../game/module/TeleportModule.js";
 import PotionModule from "../game/module/PotionModule.js";
 import DivideModule from "../game/module/DivideModule.js";
 import ShopItemCharacterModule from "../game/module/ShopItemCharacterModule.js";
+import SelfExplosionModule from "../game/module/SelfExplosionModule.js";
 
 // patterns
 import RadiusPattern from "../game/patterns/RadiusPattern.js";
@@ -22,6 +23,39 @@ import PatternRule from "../game/rules/PatternRule.js";
 import FilterRule from "../game/rules/FilterRule.js";
 
 export const characters = {
+  jar: {
+    name: "Jar",
+    hp: 1,
+    cost: 4,
+    modules: [
+      new MoveModule().addPattern(
+        new RadiusPattern(2, new PatternRule().setCharacter(false, true)),
+      ),
+      new AttackModule(30)
+        .addPattern(
+          new RadiusPattern(2, new PatternRule().setCharacter(true, true)),
+        )
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
+    ],
+  },
+
+  jar_shard: {
+    name: "Jar Shard",
+    hp: 20,
+    cantSelect: true,
+    modules: [
+      new MoveModule().addPattern(
+        new RadiusPattern(4, new PatternRule().setCharacter(false, true)),
+      ),
+      new SelfExplosionModule(10).addPattern(
+        new RadiusPattern(1, new PatternRule().setCharacter(true, false)),
+        new DiagonalPattern(1, new PatternRule().setCharacter(true, false)),
+      ),
+    ],
+  },
+
   chess_king: {
     name: "Kingy",
     hp: 100,
@@ -36,7 +70,7 @@ export const characters = {
           new RadiusPattern(1, new PatternRule().setCharacter(true, true)),
         )
         .addFilter(
-          new Filter(new FilterRule().setCharacter(true, false, false)),
+          new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
       new ShopItemCharacterModule("chess_pawn", 2),
       new ShopItemCharacterModule("chess_knight", 3),

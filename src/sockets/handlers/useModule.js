@@ -68,7 +68,7 @@ export default async function useModule(io, socket, args) {
   }
 
   // call after turn
-  game.afterMove(game.map, socket.id, fromI, fromJ, changes);
+  game.afterMove(socket.id, fromI, fromJ, changes);
 
   // change turn
   game.toggleTurn();

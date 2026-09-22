@@ -27,7 +27,7 @@ export default class KnightPattern extends IPattern {
       const nJ = posJ + fromJ;
 
       if (map[nI]?.[nJ]) {
-        if (map[nI]?.[nJ]?.character) {
+        if (map?.[nI]?.[nJ]?.character) {
           if (characterRule.include) {
             availableSlots.push([nI, nJ]);
           }
