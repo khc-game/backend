@@ -49,7 +49,7 @@ export const characters = {
       new MoveModule().addPattern(
         new RadiusPattern(4, new PatternRule().setCharacter(false, true)),
       ),
-      new SelfExplosionModule(10).addPattern(
+      new SelfExplosionModule(15).addPattern(
         new RadiusPattern(1, new PatternRule().setCharacter(true, false)),
         new DiagonalPattern(1, new PatternRule().setCharacter(true, false)),
       ),
