@@ -17,7 +17,7 @@ export default class SelfExplosionModule extends IModule {
 
   useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     addChanges(changeTypes.DEAD, [fromI, fromJ]);
-    map[fromI][fromJ].character = null;
+    map[fromI][fromJ].character.hp = 0;
 
     const damageCoords = new TargetingCalculator(
       map,
