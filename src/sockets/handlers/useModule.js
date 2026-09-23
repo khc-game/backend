@@ -75,7 +75,7 @@ export default async function useModule(io, socket, args) {
 
   // check dead characters
   const isHasDiedChar = game.tryToClearDiedCharacters();
-  const isCanOpponentMove = game.isOpponentCanUseModule(fromI, fromJ);
+  const isCanOpponentMove = game.isOpponentCanUseModule();
 
   if (!isCanOpponentMove) {
     io.to(room).emit("end:draw:opponentDontHasMove", { opponent: game.turn });

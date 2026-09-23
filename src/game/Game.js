@@ -222,7 +222,7 @@ export default class Game {
     }
   }
 
-  isOpponentCanUseModule(fromI, fromJ) {
+  isOpponentCanUseModule() {
     const playerCharacters = this.turn === this.p1[0] ? this.p1[1] : this.p2[1];
     for (let i = 0; i < playerCharacters.length; ++i) {
       const character = playerCharacters[i];
@@ -233,12 +233,8 @@ export default class Game {
         const cooldown = this.cooldown;
         if (cooldown.has(module.id)) continue;
 
-        const whereCanUse = module.whereCanUse(
-          this.map,
-          this.turn,
-          fromI,
-          fromJ,
-        );
+        const whereCanUse = module.whereCanUse(this.map, this.turn, i, j);
+
         if (whereCanUse.length > 0) {
           return true;
         }
