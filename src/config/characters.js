@@ -25,7 +25,7 @@ import FilterRule from "../game/rules/FilterRule.js";
 export const characters = {
   jar: {
     name: "Jar",
-    hp: 1,
+    hp: 40,
     cost: 4,
     modules: [
       new MoveModule().addPattern(
