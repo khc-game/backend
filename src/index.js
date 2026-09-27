@@ -7,6 +7,7 @@ import "colors";
 
 // routes
 import charactersRouter from "./routes/chracter.router.js";
+import authRouter from "./routes/auth.router.js";
 
 // listeners
 import disconnectListener from "./sockets/handlers/disconnect.js";
@@ -20,9 +21,18 @@ import useModuleListener from "./sockets/handlers/useModule.js";
 import socketConfig from "./config/socket.js";
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
 app.use("/api/characters", charactersRouter);
+app.use("/api/auth", authRouter);
+
+app.use((err, req, res, next) => {
+  if (err) {
+    console.log(err);
+    res.status(500).send({ message: err.message });
+  }
+});
 
 const server = http.createServer(app);
 const io = new Server(server, socketConfig);

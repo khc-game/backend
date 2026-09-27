@@ -2,10 +2,10 @@
 import { Router } from "express";
 
 // controllers
-import getCharactersController from '../controller/characters/getCharacters.controller.js';
+import CharacterController from "../controller/character.controller.js";
 
 const router = Router();
 
-router.get("/", getCharactersController);
+router.get("/", CharacterController.getCharacters);
 
 export default router;

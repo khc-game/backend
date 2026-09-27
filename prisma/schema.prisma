@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  username      String
+  created_at    DateTime @default(now())
+  token_version Int      @default(0)
+  auth          Auth?
+  tokens        Token[]
+}
+
+model Auth {
+  user_id       Int      @unique
+  password_hash String
+  created_at    DateTime @default(now())
+  user          User     @relation(fields: [user_id], references: [id])
+}
+
+model Token {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  token      String   @unique
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id])
+}
