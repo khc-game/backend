@@ -54,7 +54,7 @@ export default class AuthService {
     }
 
     // auth validate
-    const userAuth = await prisma.auth.findMany({
+    const [userAuth] = await prisma.auth.findMany({
       where: {
         user_id: user.id,
       },
@@ -62,6 +62,12 @@ export default class AuthService {
 
     if (!userAuth) {
       throw new Error("User not found");
+    }
+
+    // password validation
+    const isPassValid = Bcrypt.compare(userAuth.password_hash, password);
+    if (!isPassValid) {
+      throw new Error("Invalid password");
     }
 
     // create token
