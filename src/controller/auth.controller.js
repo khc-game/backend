@@ -17,6 +17,17 @@ export default class AuthController {
     res.status(200).send({ accessToken, refreshToken });
   }
 
+  static async refreshToken(req, res) {
+    const bearerToken = req.headers.authorization?.split(" ")[1];
+    if (!bearerToken) {
+      throw new Error("Empty token");
+    }
+
+    const tokens = await AuthService.refreshToken(bearerToken);
+
+    res.status(200).send({ tokens });
+  }
+
   static async changePassword(req, res) {
     res.sendStatus(503);
   }

@@ -71,22 +71,8 @@ export default class AuthService {
     }
 
     // create token
-    const accessToken = JWT.code(
-      {
-        username: user.username,
-        id: user.id,
-        version: user.token_version,
-      },
-      process.env.ACCESS_TOKEN_EXPIRES,
-    );
-
-    const refreshToken = JWT.code(
-      {
-        id: user.id,
-        version: user.token_version,
-      },
-      process.env.REFRESH_TOKEN_EXPIRES,
-    );
+    const { accessToken, refreshToken } =
+      AuthService.generateTokensByUserData(user);
 
     // save token
     await prisma.token.create({
@@ -98,5 +84,75 @@ export default class AuthService {
 
     // return token
     return { accessToken, refreshToken };
+  }
+
+  static generateTokensByUserData(user) {
+    const accessToken = JWT.code(
+      {
+        username: user.username,
+        userId: user.id,
+        version: user.token_version,
+      },
+      process.env.ACCESS_TOKEN_EXPIRES,
+    );
+
+    const refreshToken = JWT.code(
+      {
+        userId: user.id,
+        version: user.token_version,
+      },
+      process.env.REFRESH_TOKEN_EXPIRES,
+    );
+
+    return { accessToken, refreshToken };
+  }
+
+  static async refreshToken(token) {
+    // get token from DB
+    const tokenData = (
+      await prisma.token.findMany({
+        where: {
+          token,
+        },
+      })
+    )[0];
+    if (!tokenData) {
+      throw new Error("Token expired");
+    }
+
+    // parse
+    const parsedData = JWT.verify(token);
+
+    // get user from db
+    const user = (
+      await prisma.user.findMany({
+        where: {
+          id: parsedData.userId,
+        },
+      })
+    )[0];
+    if (!user) {
+      throw new Error("Invalid token");
+    }
+
+    // check version
+    if (user.token_version !== parsedData.version) {
+      throw new Error("Invalid token");
+    }
+
+    // generate tokens
+    const tokens = AuthService.generateTokensByUserData(user);
+
+    // update token
+    await prisma.token.update({
+      where: {
+        token,
+      },
+      data: {
+        token: tokens.refreshToken,
+      },
+    });
+
+    return tokens;
   }
 }
