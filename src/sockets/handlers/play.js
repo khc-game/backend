@@ -50,10 +50,7 @@ export default async function play(io, socket, selectedPersons) {
   }
 
   if (totalCost > maxCharacters) {
-    return socket.emit(
-      "message",
-      `Total cost is biggest than ${maxCharacters}`,
-    );
+    return socket.emit("message", `Total cost is bigger than ${maxCharacters}`);
   }
 
   // GAME

@@ -33,7 +33,7 @@ export default async function useModule(io, socket, args) {
   // use module
   let changes = [];
 
-  const isFirstPlayer = socket.id === game.p1[0];
+  const isFirstPlayer = socket.id === game.p1;
   if (module.isShopItem) {
     if (character.shop[1] >= module.cost) {
       character.shop[1] -= module.cost;

@@ -18,13 +18,13 @@ export default class Game {
     const p1SocketId = p1[0];
     const p2SocketId = p2[0];
 
-    this.p1 = p1;
-    this.p2 = p2;
+    this.p1 = p1SocketId;
+    this.p2 = p2SocketId;
     this.turn = p1SocketId;
     this.cooldown = new Cooldown();
     this.#initMap();
-    this.#initPlayersCharacters();
-    this.timer = new Timer(p1SocketId, p2SocketId, sessionMinutes);
+    this.#initPlayersCharacters(p1, p2);
+    this.timer = new Timer(this.p1, this.p2, sessionMinutes);
   }
 
   #initMap() {
@@ -42,12 +42,9 @@ export default class Game {
     }
   }
 
-  #initPlayersCharacters() {
-    const p1Characters = this.#initPlayerCharacters(this.p1);
-    const p2Characters = this.#initPlayerCharacters(this.p2);
-
-    this.p1[1] = p1Characters;
-    this.p2[1] = p2Characters;
+  #initPlayersCharacters(p1, p2) {
+    const p1Characters = this.#initPlayerCharacters(p1);
+    const p2Characters = this.#initPlayerCharacters(p2);
 
     {
       let midIndex =
@@ -86,7 +83,7 @@ export default class Game {
     return {
       map: this.map,
       turn: this.turn,
-      players: [this.p1[0], this.p2[0]],
+      players: [this.p1, this.p2],
     };
   }
 
@@ -95,28 +92,11 @@ export default class Game {
   }
 
   toggleTurn() {
-    this.turn = this.turn === this.p1[0] ? this.p2[0] : this.p1[0];
+    this.turn = this.turn === this.p1 ? this.p2 : this.p1;
     this.timer.switch();
   }
 
-  tryToClearDiedCharactersByChanges(changes) {
-    // ! NEED refactor
-    // let isHasDiedChar = false;
-    // for (let i = 0; i < changes.length; ++i) {
-    //   const { changeType, data } = changes[i];
-    //   const [posI, posJ] = data;
-    //   const cellData = this.map[posI][posJ];
-    //   if (cellData.character && cellData.character.hp === 0) {
-    //     cellData.character = null;
-    //     isHasDiedChar = true;
-    //   }
-    // }
-    // return isHasDiedChar;
-  }
-
   tryToClearDiedCharacters() {
-    // using instead of tryToClearDiedCharactersByChanges
-
     let isHasDiedChar = false;
 
     for (let i = 0; i < this.map.length; ++i) {
@@ -223,7 +203,29 @@ export default class Game {
   }
 
   isOpponentCanUseModule() {
-    const playerCharacters = this.turn === this.p1[0] ? this.p1[1] : this.p2[1];
+    for (let i = 0; i < this.map.length; ++i) {
+      for (let j = 0; j < this.map[i].length; ++j) {
+        const cell = this.map[i][j];
+
+        const character = cell.character;
+        if (!character || character.playerId !== this.turn) continue;
+
+        const modules = character.modules;
+        for (let k = 0; k < modules.length; ++k) {
+          const module = modules[k];
+
+          const cooldown = this.cooldown;
+          if (cooldown.has(module.id)) continue;
+
+          const whereCanUse = module.whereCanUse(this.map, this.turn, i, j);
+
+          if (whereCanUse.length > 0) {
+            return true;
+          }
+        }
+      }
+    }
+
     for (let i = 0; i < playerCharacters.length; ++i) {
       const character = playerCharacters[i];
       const modules = character.modules;
