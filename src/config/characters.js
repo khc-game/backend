@@ -1,3 +1,6 @@
+// character
+import DefaultCharacter from "../game/characters/DefaultCharacter.js";
+
 // modules
 import MoveModule from "../game/module/MoveModule.js";
 import MovePawnModule from "../game/module/MovePawnModule.js";
@@ -22,9 +25,10 @@ import Filter from "../game/filters/Filter.js";
 import PatternRule from "../game/rules/PatternRule.js";
 import FilterRule from "../game/rules/FilterRule.js";
 
-export const characters = {
-  jar: {
+export const charactersValues = [
+  new DefaultCharacter({
     name: "Jar",
+    key: "jar",
     hp: 40,
     cost: 4,
     modules: [
@@ -39,10 +43,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
     ],
-  },
+  }),
 
-  jar_shard: {
+  new DefaultCharacter({
     name: "Jar Shard",
+    key: "jar_shard",
     hp: 20,
     cantSelect: true,
     modules: [
@@ -54,10 +59,11 @@ export const characters = {
         new DiagonalPattern(1, new PatternRule().setCharacter(true, false)),
       ),
     ],
-  },
+  }),
 
-  chess_king: {
+  new DefaultCharacter({
     name: "Kingy",
+    key: "chess_king",
     hp: 100,
     cost: 5,
     shop: ["Figure's Shop", 0, 1],
@@ -77,10 +83,11 @@ export const characters = {
       new ShopItemCharacterModule("chess_bishop", 4),
       new ShopItemCharacterModule("chess_rook", 5),
     ],
-  },
+  }),
 
-  chess_queen: {
+  new DefaultCharacter({
     name: "Queeny",
+    key: "chess_queen",
     hp: 100,
     cantSelect: true,
     modules: [
@@ -97,10 +104,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
     ],
-  },
+  }),
 
-  chess_rook: {
+  new DefaultCharacter({
     name: "Roko",
+    key: "chess_rook",
     hp: 100,
     cantSelect: true,
     modules: [
@@ -115,10 +123,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
     ],
-  },
+  }),
 
-  chess_bishop: {
+  new DefaultCharacter({
     name: "Bishpi",
+    key: "chess_bishop",
     hp: 100,
     cantSelect: true,
     modules: [
@@ -133,10 +142,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
     ],
-  },
+  }),
 
-  chess_knight: {
+  new DefaultCharacter({
     name: "Knith",
+    key: "chess_knight",
     hp: 100,
     cantSelect: true,
     modules: [
@@ -149,10 +159,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
     ],
-  },
+  }),
 
-  chess_pawn: {
+  new DefaultCharacter({
     name: "Pawon",
+    key: "chess_pawn",
     hp: 100,
     cantSelect: true,
     modules: [
@@ -167,10 +178,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
     ],
-  },
+  }),
 
-  jellish: {
+  new DefaultCharacter({
     name: "Jellish",
+    key: "jellish",
     hp: 100,
     cost: 1,
     modules: [
@@ -185,10 +197,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
     ],
-  },
+  }),
 
-  rock: {
+  new DefaultCharacter({
     name: "Rock",
+    key: "rock",
     hp: 200,
     cost: 5,
     modules: [
@@ -203,10 +216,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, false, true)),
         ),
     ],
-  },
+  }),
 
-  vampire: {
+  new DefaultCharacter({
     name: "Vampire",
+    key: "vampire",
     hp: 100,
     cost: 2,
     modules: [
@@ -219,10 +233,11 @@ export const characters = {
         )
         .addFilter(new Filter(new FilterRule().setCharacter(true, true, true))),
     ],
-  },
+  }),
 
-  bambrik: {
+  new DefaultCharacter({
     name: "Bambrik",
+    key: "bambrik",
     hp: 100,
     cost: 2,
     modules: [
@@ -238,10 +253,11 @@ export const characters = {
         ),
       new TeleportModule(1),
     ],
-  },
+  }),
 
-  honlia: {
+  new DefaultCharacter({
     name: "Honlia",
+    key: "honlia",
     hp: 100,
     cost: 4,
     modules: [
@@ -263,10 +279,11 @@ export const characters = {
           new Filter(new FilterRule().setCharacter(true, true, false)),
         ),
     ],
-  },
+  }),
 
-  amoeba: {
+  new DefaultCharacter({
     name: "Amoeba",
+    key: "amoeba",
     hp: 10,
     cost: 1,
     modules: [
@@ -281,20 +298,17 @@ export const characters = {
         new RadiusPattern(1, new PatternRule().setCharacter(false, true)),
       ),
     ],
-  },
-};
+  }),
+];
 
-export const charactersValues = [];
+export const characters = {};
 
 export const characterKeys = {};
 
-for (const key in characters) {
-  const char = {
-    ...characters[key],
-    key,
-  };
+for (let i = 0; i < charactersValues.length; ++i) {
+  const character = charactersValues[i];
 
+  const key = character.key;
   characterKeys[key] = key;
-
-  charactersValues.push(char);
+  characters[key] = character;
 }

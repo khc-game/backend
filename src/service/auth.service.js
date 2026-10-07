@@ -117,6 +117,7 @@ export default class AuthService {
       })
     )[0];
     if (!tokenData) {
+      console.log(token);
       throw new Error("Token expired");
     }
 
