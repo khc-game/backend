@@ -1,7 +1,9 @@
 // game
-import Character from "./Character.js";
 import Cooldown from "./Cooldown.js";
 import Timer from "./Timer.js";
+
+// utils
+import buildCharacterByKey from "../utils/buildCharacterByKey.js";
 
 // constants
 import changeTypes from "../constants/changeTypes.js";
@@ -45,6 +47,8 @@ export default class Game {
   #initPlayersCharacters(p1, p2) {
     const p1Characters = this.#initPlayerCharacters(p1);
     const p2Characters = this.#initPlayerCharacters(p2);
+    console.log(p1Characters);
+    console.log(p2Characters);
 
     {
       let midIndex =
@@ -73,7 +77,8 @@ export default class Game {
 
     for (let i = 0; i < charsKeys.length; ++i) {
       const charKey = charsKeys[i];
-      result.push(new Character(charKey, playerId));
+      const char = buildCharacterByKey(charKey, playerId);
+      result.push(char);
     }
 
     return result;
@@ -188,7 +193,7 @@ export default class Game {
             if (currentShards++ === maxShards) break;
 
             const playerId = character.playerId;
-            const jar_shard = new Character("jar_shard", playerId);
+            const jar_shard = buildCharacterByKey("jar_shard", playerId);
             const change = {
               changeType: changeTypes.SPAWN_CHARACTER,
               data: [nI, nJ, jar_shard],

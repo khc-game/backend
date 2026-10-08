@@ -1,17 +1,19 @@
 // game
 import MoveModule from "./MoveModule.js";
 
+// utils
+import buildCharacterByKey from "../../utils/buildCharacterByKey.js";
+
 // constants
 import changeTypes from "../../constants/changeTypes.js";
 import { characterKeys } from "../../config/characters.js";
-import Character from "../Character.js";
 
 export default class MovePawnModule extends MoveModule {
   constructor() {
     super();
   }
 
-  useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
+  useLogic(map, playerId, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     const character = map[fromI][fromJ].character;
     map[fromI][fromJ].character = null;
     map[toI][toJ].character = character;
@@ -26,7 +28,10 @@ export default class MovePawnModule extends MoveModule {
     }
 
     if (isOpponentLine) {
-      const newCharacter = new Character(characterKeys.chess_queen, player);
+      const newCharacter = buildCharacterByKey(
+        characterKeys.chess_queen,
+        playerId,
+      );
       map[toI][toJ].character = newCharacter;
       addChanges(changeTypes.TRANSFORM_CHARACTER, [toI, toJ, newCharacter]);
     }

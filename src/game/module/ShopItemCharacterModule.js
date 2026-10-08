@@ -1,11 +1,9 @@
-// character
-import Character from "../Character.js";
-
 // module
 import IShopItemModule from "./Interface/IShopItemModule.js";
 
 // utils
 import findCaUseCollision from "../../utils/findCanUseCollision.js";
+import buildCharacterByKey from "../../utils/buildCharacterByKey.js";
 
 // constants
 import changeTypes from "../../constants/changeTypes.js";
@@ -48,7 +46,7 @@ export default class ShopItemCharacterModule extends IShopItemModule {
   }
 
   useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
-    const character = new Character(this.title, player);
+    const character = buildCharacterByKey(this.title, player);
     map[toI][toJ].character = character;
     addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, character]);
   }

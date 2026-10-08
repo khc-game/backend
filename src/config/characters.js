@@ -309,6 +309,6 @@ for (let i = 0; i < charactersValues.length; ++i) {
   const character = charactersValues[i];
 
   const key = character.key;
-  characterKeys[key] = key;
   characters[key] = character;
+  characterKeys[key] = key;
 }
