@@ -47,8 +47,6 @@ export default class Game {
   #initPlayersCharacters(p1, p2) {
     const p1Characters = this.#initPlayerCharacters(p1);
     const p2Characters = this.#initPlayerCharacters(p2);
-    console.log(p1Characters);
-    console.log(p2Characters);
 
     {
       let midIndex =
@@ -227,23 +225,6 @@ export default class Game {
           if (whereCanUse.length > 0) {
             return true;
           }
-        }
-      }
-    }
-
-    for (let i = 0; i < playerCharacters.length; ++i) {
-      const character = playerCharacters[i];
-      const modules = character.modules;
-      for (let j = 0; j < modules.length; ++j) {
-        const module = modules[i];
-
-        const cooldown = this.cooldown;
-        if (cooldown.has(module.id)) continue;
-
-        const whereCanUse = module.whereCanUse(this.map, this.turn, i, j);
-
-        if (whereCanUse.length > 0) {
-          return true;
         }
       }
     }
