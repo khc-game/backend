@@ -35,7 +35,7 @@ export const charactersValues = [
       new MoveModule().addPattern(
         new RadiusPattern(2, new PatternRule().setCharacter(false, true)),
       ),
-      new AttackModule(300)
+      new AttackModule(30)
         .addPattern(
           new RadiusPattern(2, new PatternRule().setCharacter(true, true)),
         )
