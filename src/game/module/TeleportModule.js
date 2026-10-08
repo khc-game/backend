@@ -1,9 +1,6 @@
 // game
 import IModule from "./interface/IModule.js";
 
-// utils
-import findCanUseCollision from "../../utils/findCanUseCollision.js";
-
 // constants
 import changeTypes from "../../constants/changeTypes.js";
 

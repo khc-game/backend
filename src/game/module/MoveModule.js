@@ -1,9 +1,5 @@
 // game
 import IModule from "./interface/IModule.js";
-import TargetingCalculator from "../TargetingCalculator.js";
-
-// utils
-import findCanUseCollision from "../../utils/findCanUseCollision.js";
 
 // constants
 import changeTypes from "../../constants/changeTypes.js";

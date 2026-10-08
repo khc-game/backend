@@ -11,7 +11,6 @@ export default class AttackModule extends IModule {
   }
 
   useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
-    const cellData = map[fromI][fromJ].character;
     map[toI][toJ].character.attacked(this.damage);
 
     addChanges(changeTypes.DAMAGE, [toI, toJ, this.damage]);

@@ -2,7 +2,6 @@
 import IShopItemModule from "./Interface/IShopItemModule.js";
 
 // utils
-import findCaUseCollision from "../../utils/findCanUseCollision.js";
 import buildCharacterByKey from "../../utils/buildCharacterByKey.js";
 
 // constants
