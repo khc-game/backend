@@ -53,13 +53,18 @@ export default class DefaultCharacter extends ICharacter {
     return clone;
   }
 
-  afterMove(map, playerId, fromI, fromJ, changes) {
+  afterMove(map, playerId, fromI, fromJ, changes, charI, charJ) {
+    console.log("afterMove - Default");
     this.modules.forEach((module) =>
-      module.afterMove(map, playerId, fromI, fromJ, changes),
+      module.afterMove(map, playerId, fromI, fromJ, changes, charI, charJ),
     );
 
     if (this.shop) {
       this.shop[1] += this.shop[2];
     }
+  }
+
+  afterEnemyMove(map, playerId, fromI, fromJ, changes, charI, charJ) {
+    console.log("afterEnemyMove - Default");
   }
 }

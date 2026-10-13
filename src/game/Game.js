@@ -5,9 +5,6 @@ import Timer from "./Timer.js";
 // utils
 import buildCharacterByKey from "../utils/buildCharacterByKey.js";
 
-// constants
-import changeTypes from "../constants/changeTypes.js";
-
 export default class Game {
   p1 = null;
   p2 = null;
@@ -140,65 +137,25 @@ export default class Game {
         const { character } = this.map[i][j];
         if (character) {
           if (character.playerId === playerId) {
-            character.afterMove(this.map, playerId, fromI, fromJ, changes);
-          }
-        }
-      }
-    }
-
-    this.checkChangesAfterMove(changes, playerId);
-  }
-
-  checkChangesAfterMove(changes, playerId) {
-    for (let i = 0; i < changes.length; ++i) {
-      const change = changes[i];
-      if (change.changeType === changeTypes.DEAD) {
-        const [i, j] = change.data;
-        const character = this.map[i][j]?.character;
-        if (character) {
-          this.#deadCharacterCheck(changes, character, i, j);
-        }
-      }
-    }
-  }
-
-  #deadCharacterCheck(changes, character, i, j) {
-    if (character.key === "jar") {
-      if (character.hp <= 0) {
-        this.map[i][j].character = null;
-
-        const dist = [
-          [0, -1],
-          [0, 1],
-          [1, 0],
-          [-1, 0],
-          [1, 1],
-          [-1, -1],
-          [1, -1],
-          [-1, 1],
-          [0, 0],
-        ];
-
-        const maxShards = 3;
-        let currentShards = 0;
-
-        for (let k = 0; k < dist.length; ++k) {
-          const [dI, dJ] = dist[k];
-          const nI = i + dI;
-          const nJ = j + dJ;
-
-          if (this.map?.[nI]?.[nJ]?.character === null) {
-            if (currentShards++ === maxShards) break;
-
-            const playerId = character.playerId;
-            const jar_shard = buildCharacterByKey("jar_shard", playerId);
-            const change = {
-              changeType: changeTypes.SPAWN_CHARACTER,
-              data: [nI, nJ, jar_shard],
-            };
-
-            this.map[nI][nJ].character = jar_shard;
-            changes.push(change);
+            character.afterMove(
+              this.map,
+              playerId,
+              fromI,
+              fromJ,
+              changes,
+              i,
+              j,
+            );
+          } else {
+            character.afterEnemyMove(
+              this.map,
+              playerId,
+              fromI,
+              fromJ,
+              changes,
+              i,
+              j,
+            );
           }
         }
       }

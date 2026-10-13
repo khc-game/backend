@@ -1,8 +1,9 @@
 // game
 import DefaultCharacter from "../game/characters/DefaultCharacter.js";
+import JarCharacter from "../game/characters/JarCharacter.js";
 
 // constants
-import { characters } from "../config/characters.js";
+import { characters, characterKeys } from "../config/characters.js";
 
 export default function buildCharacterByKey(characterKey, playerId = null) {
   const character = characters[characterKey];
@@ -16,6 +17,10 @@ export default function buildCharacterByKey(characterKey, playerId = null) {
       cost: 9999,
       playerId,
     });
+  }
+
+  if (characterKey === characterKeys.jar) {
+    return new JarCharacter({ ...character, playerId });
   }
 
   return new DefaultCharacter({ ...character, playerId });
