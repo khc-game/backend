@@ -1,5 +1,6 @@
 // character
 import DefaultCharacter from "../game/characters/DefaultCharacter.js";
+import JarCharacter from "../game/characters/JarCharacter.js";
 
 // modules
 import MoveModule from "../game/module/MoveModule.js";
@@ -26,7 +27,7 @@ import PatternRule from "../game/rules/PatternRule.js";
 import FilterRule from "../game/rules/FilterRule.js";
 
 export const charactersValues = [
-  new DefaultCharacter({
+  new JarCharacter({
     name: "Jar",
     key: "jar",
     hp: 40,
@@ -71,9 +72,9 @@ export const charactersValues = [
       new MoveModule().addPattern(
         new RadiusPattern(1, new PatternRule().setCharacter(false, true)),
       ),
-      new AttackModule(5)
+      new AttackModule(500)
         .addPattern(
-          new RadiusPattern(1, new PatternRule().setCharacter(true, true)),
+          new RadiusPattern(7, new PatternRule().setCharacter(true, true)),
         )
         .addFilter(
           new Filter(new FilterRule().setCharacter(true, false, true)),

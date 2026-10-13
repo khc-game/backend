@@ -73,19 +73,11 @@ export default async function useModule(io, socket, args) {
   // change turn
   game.toggleTurn();
 
-  // check dead characters
-  const isHasDiedChar = game.tryToClearDiedCharacters();
-  const isCanOpponentMove = game.isOpponentCanUseModule();
-
-  if (!isCanOpponentMove) {
-    io.to(room).emit("end:draw:opponentDontHasMove", { opponent: game.turn });
-    return;
-  }
-
   // send changes to client
   io.to(room).emit("module:changes", [changes, game.turn]);
 
   // check player characters count
+  const isHasDiedChar = game.tryToClearDiedCharacters();
   if (isHasDiedChar) {
     const winnerId = game.isEnemyCharactersDestroed();
     if (winnerId) {
@@ -93,6 +85,13 @@ export default async function useModule(io, socket, args) {
       BattleService.closeRoom(room);
       BattleService.checkInterval();
       io.in(room).socketsLeave(room);
+    }
+  } else {
+    // check dead characters
+    const isCanOpponentMove = game.isOpponentCanUseModule();
+    if (!isCanOpponentMove) {
+      io.to(room).emit("end:draw:opponentDontHasMove", { opponent: game.turn });
+      return;
     }
   }
 }

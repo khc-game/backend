@@ -55,7 +55,7 @@ export default class IModule {
   }
 
   // if need do something
-  afterMove(map, playerId, fromI, fromJ, changes) {}
+  afterMove(map, playerId, fromI, fromJ, changes, charI, charJ) {}
 
   addPattern(...patterns) {
     this.patterns = [...this.patterns, ...patterns];
