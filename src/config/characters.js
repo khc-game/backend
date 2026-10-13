@@ -27,6 +27,14 @@ import FilterRule from "../game/rules/FilterRule.js";
 
 export const charactersValues = [
   new DefaultCharacter({
+    name: "Dancle",
+    key: "dancle",
+    cost: 6,
+    hp: 100,
+    modules: [],
+  }),
+
+  new DefaultCharacter({
     name: "Jar",
     key: "jar",
     hp: 40,
