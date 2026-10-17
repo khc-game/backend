@@ -54,7 +54,6 @@ export default class DefaultCharacter extends ICharacter {
   }
 
   afterMove(map, playerId, fromI, fromJ, changes, charI, charJ) {
-    console.log("afterMove - Default");
     this.modules.forEach((module) =>
       module.afterMove(map, playerId, fromI, fromJ, changes, charI, charJ),
     );
@@ -64,7 +63,5 @@ export default class DefaultCharacter extends ICharacter {
     }
   }
 
-  enemyReactionAfterMove(map, playerId, fromI, fromJ, changes, charI, charJ) {
-    console.log("enemyReactionAfterMove - Default");
-  }
+  reactionAfterEnemyMove(map, playerId, fromI, fromJ, changes, charI, charJ) {}
 }

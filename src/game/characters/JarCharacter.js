@@ -31,7 +31,7 @@ export default class JarCharacter extends DefaultCharacter {
     return clone;
   }
 
-  enemyReactionAfterMove(map, playerId, fromI, fromJ, changes, charI, charJ) {
+  reactionAfterEnemyMove(map, playerId, fromI, fromJ, changes, charI, charJ) {
     if (this.hp <= 0) {
       map[charI][charJ].character = null;
 

@@ -7,6 +7,7 @@ const changeTypes = {
   HEAL: "heal",
   DEAD: "dead",
   TRANSFORM_CHARACTER: "transform_character",
+  MODULES_UPDATE: "modules_update",
 };
 
 export default changeTypes;

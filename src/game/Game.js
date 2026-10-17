@@ -147,7 +147,7 @@ export default class Game {
               j,
             );
           } else {
-            character.enemyReactionAfterMove(
+            character.reactionAfterEnemyMove(
               this.map,
               playerId,
               fromI,

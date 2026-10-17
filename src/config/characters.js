@@ -1,6 +1,7 @@
 // character
 import DefaultCharacter from "../game/characters/DefaultCharacter.js";
 import JarCharacter from "../game/characters/JarCharacter.js";
+import DancleCharacter from "../game/characters/DancleCharacter.js";
 
 // modules
 import MoveModule from "../game/module/MoveModule.js";
@@ -27,12 +28,61 @@ import PatternRule from "../game/rules/PatternRule.js";
 import FilterRule from "../game/rules/FilterRule.js";
 
 export const charactersValues = [
-  new DefaultCharacter({
+  new DancleCharacter({
     name: "Dancle",
     key: "dancle",
     cost: 6,
     hp: 100,
-    modules: [],
+    modules: [
+      new MoveModule().addPattern(
+        new RadiusPattern(6, new PatternRule().setCharacter(false, true)),
+      ),
+      new AttackModule(10)
+        .addPattern(
+          new RadiusPattern(2, new PatternRule().setCharacter(true, true)),
+        )
+        .addFilter(
+          new Filter(new FilterRule().setCharacter(true, false, true)),
+        ),
+    ],
+    modulesStack: [
+      [
+        new MoveModule().addPattern(
+          new RadiusPattern(4, new PatternRule().setCharacter(false, true)),
+        ),
+        new AttackModule(20)
+          .addPattern(
+            new RadiusPattern(2, new PatternRule().setCharacter(true, true)),
+          )
+          .addFilter(
+            new Filter(new FilterRule().setCharacter(true, false, true)),
+          ),
+      ],
+      [
+        new MoveModule().addPattern(
+          new RadiusPattern(5, new PatternRule().setCharacter(false, true)),
+        ),
+        new AttackModule(30)
+          .addPattern(
+            new RadiusPattern(3, new PatternRule().setCharacter(true, true)),
+          )
+          .addFilter(
+            new Filter(new FilterRule().setCharacter(true, false, true)),
+          ),
+      ],
+      [
+        new MoveModule().addPattern(
+          new RadiusPattern(6, new PatternRule().setCharacter(false, true)),
+        ),
+        new AttackModule(40)
+          .addPattern(
+            new RadiusPattern(4, new PatternRule().setCharacter(true, true)),
+          )
+          .addFilter(
+            new Filter(new FilterRule().setCharacter(true, false, true)),
+          ),
+      ],
+    ],
   }),
 
   new JarCharacter({
