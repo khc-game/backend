@@ -50,8 +50,14 @@ export default class DancleCharacter extends DefaultCharacter {
     ++this.move;
 
     if (this.move % 10 === 0) {
-      this.hp -= 10;
-      this.maxHP -= 10;
+      const damageSize = 10;
+      this.damaged(damageSize);
+      this.maxHP -= damageSize;
+
+      changes.push({
+        changeType: changeTypes.DAMAGE,
+        data: damageSize,
+      });
 
       // change modules stack to another
       const modulesStack = this.modulesStack?.shift();

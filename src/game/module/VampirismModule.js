@@ -18,7 +18,7 @@ export default class VampirismModule extends IModule {
       (opponent.hp < this.blood ? opponent.hp : this.blood) / 2,
     );
 
-    opponent.attacked(this.blood);
+    opponent.damaged(this.blood);
     character.heal(bloodForPlayer);
 
     addChanges(changeTypes.HEAL, [fromI, fromJ, bloodForPlayer]);

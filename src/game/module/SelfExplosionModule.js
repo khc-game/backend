@@ -33,7 +33,7 @@ export default class SelfExplosionModule extends IModule {
       const targetCharacter = map[i]?.[j]?.character;
 
       if (targetCharacter) {
-        targetCharacter.attacked(this.damage);
+        targetCharacter.damaged(this.damage);
         addChanges(changeTypes.DAMAGE, [i, j, this.damage]);
       }
     }

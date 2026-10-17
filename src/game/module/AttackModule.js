@@ -11,7 +11,7 @@ export default class AttackModule extends IModule {
   }
 
   useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
-    map[toI][toJ].character.attacked(this.damage);
+    map[toI][toJ].character.damaged(this.damage);
 
     addChanges(changeTypes.DAMAGE, [toI, toJ, this.damage]);
     if (map[toI][toJ].character.hp <= 0) {

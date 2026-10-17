@@ -1,5 +1,5 @@
 export default class ICharacter {
-  attacked(damage) {}
+  damaged(damage) {}
   heal(amount) {}
   clone() {}
   afterMove(map, playerId, fromI, fromJ, changes, charI, charJ) {}
