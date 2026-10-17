@@ -35,7 +35,7 @@ export const charactersValues = [
     modules: [],
   }),
 
-  new DefaultCharacter({
+  new JarCharacter({
     name: "Jar",
     key: "jar",
     hp: 40,
