@@ -64,7 +64,7 @@ export default class DefaultCharacter extends ICharacter {
     }
   }
 
-  afterEnemyMove(map, playerId, fromI, fromJ, changes, charI, charJ) {
-    console.log("afterEnemyMove - Default");
+  enemyReactionAfterMove(map, playerId, fromI, fromJ, changes, charI, charJ) {
+    console.log("enemyReactionAfterMove - Default");
   }
 }
