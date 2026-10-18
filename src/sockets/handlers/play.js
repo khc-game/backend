@@ -86,7 +86,6 @@ export default async function play(io, socket, selectedPersons) {
 
     // send map to players
     const format = game.formatForClient();
-    console.log(format);
 
     io.to(room).emit("play", format);
   }
