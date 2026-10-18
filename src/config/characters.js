@@ -130,7 +130,7 @@ export const charactersValues = [
       new MoveModule().addPattern(
         new RadiusPattern(1, new PatternRule().setCharacter(false, true)),
       ),
-      new AttackModule(500)
+      new AttackModule(10)
         .addPattern(
           new RadiusPattern(7, new PatternRule().setCharacter(true, true)),
         )
