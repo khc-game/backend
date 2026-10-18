@@ -76,21 +76,26 @@ export default async function useModule(io, socket, args) {
   // send changes to client
   io.to(room).emit("module:changes", [changes, game.turn]);
 
+  const closeRoom = () => {
+    BattleService.closeRoom(room);
+    BattleService.checkInterval();
+    io.in(room).socketsLeave(room);
+  };
+
   // check player characters count
   const isHasDiedChar = game.tryToClearDiedCharacters();
   if (isHasDiedChar) {
     const winnerId = game.isEnemyCharactersDestroed();
     if (winnerId) {
       io.to(room).emit("end:killed", { winnerId });
-      BattleService.closeRoom(room);
-      BattleService.checkInterval();
-      io.in(room).socketsLeave(room);
+      closeRoom();
     }
   } else {
     // check dead characters
     const isCanOpponentMove = game.isOpponentCanUseModule();
     if (!isCanOpponentMove) {
       io.to(room).emit("end:draw:opponentDontHasMove", { opponent: game.turn });
+      closeRoom();
       return;
     }
   }
