@@ -8,6 +8,7 @@ import "colors";
 // routes
 import charactersRouter from "./routes/chracter.router.js";
 import authRouter from "./routes/auth.router.js";
+import userRouter from "./routes/user.router.js";
 
 // listeners
 import disconnectListener from "./sockets/handlers/disconnect.js";
@@ -26,6 +27,7 @@ app.use(cors());
 
 app.use("/api/characters", charactersRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 app.use((err, req, res, next) => {
   if (err) {
