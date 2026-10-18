@@ -1,5 +1,6 @@
 // game
 import IModule from "./interface/IModule.js";
+import Change from "../Change.js";
 
 // constants
 import changeTypes from "../../constants/changeTypes.js";
@@ -13,9 +14,10 @@ export default class AttackModule extends IModule {
   useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     map[toI][toJ].character.damaged(this.damage);
 
-    addChanges(changeTypes.DAMAGE, [toI, toJ, this.damage]);
+    addChanges(Change.damage(toI, toJ, this.damage));
+
     if (map[toI][toJ].character.hp <= 0) {
-      addChanges(changeTypes.DEAD, [toI, toJ]);
+      addChanges(Change.dead(toI, toJ, toJ));
     }
   }
 

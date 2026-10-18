@@ -1,12 +1,11 @@
+// game
+import Change from "../Change.js";
+
 // module
 import IShopItemModule from "./Interface/IShopItemModule.js";
 
 // utils
 import buildCharacterByKey from "../../utils/buildCharacterByKey.js";
-
-// constants
-import changeTypes from "../../constants/changeTypes.js";
-import { characters } from "../../config/characters.js";
 
 export default class ShopItemCharacterModule extends IShopItemModule {
   constructor(title, cost, cooldown = null) {
@@ -47,7 +46,7 @@ export default class ShopItemCharacterModule extends IShopItemModule {
   useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
     const character = buildCharacterByKey(this.title, player);
     map[toI][toJ].character = character;
-    addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, character]);
+    addChanges(Change.spawnCharacter(toI, toJ, character));
   }
 
   copy() {

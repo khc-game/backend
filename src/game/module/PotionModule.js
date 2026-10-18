@@ -1,8 +1,6 @@
 // game
 import IModule from "./interface/IModule.js";
-
-// constants
-import changeTypes from "../../constants/changeTypes.js";
+import Change from "../Change.js";
 
 export default class PotionModule extends IModule {
   constructor(heal, cooldown) {
@@ -14,7 +12,7 @@ export default class PotionModule extends IModule {
     const currentHp = map[toI][toJ].character.hp;
     map[toI][toJ].character.heal(this.heal);
     const updateHp = map[toI][toJ].character.hp;
-    addChanges(changeTypes.HEAL, [toI, toJ, updateHp - currentHp]);
+    addChanges(Change.heal(toI, toJ, updateHp - currentHp));
   }
 
   copy() {

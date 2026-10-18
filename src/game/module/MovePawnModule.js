@@ -1,11 +1,11 @@
 // game
 import MoveModule from "./MoveModule.js";
+import Change from "../Change.js";
 
 // utils
 import buildCharacterByKey from "../../utils/buildCharacterByKey.js";
 
 // constants
-import changeTypes from "../../constants/changeTypes.js";
 import { characterKeys } from "../../config/characters.js";
 
 export default class MovePawnModule extends MoveModule {
@@ -18,7 +18,7 @@ export default class MovePawnModule extends MoveModule {
     map[fromI][fromJ].character = null;
     map[toI][toJ].character = character;
 
-    addChanges(changeTypes.MOVE, [fromI, fromJ, toI, toJ]);
+    addChanges(Change.move(fromI, fromJ, toI, toJ));
 
     let isOpponentLine = false;
     if (isFirstPlayer) {
@@ -33,7 +33,7 @@ export default class MovePawnModule extends MoveModule {
         playerId,
       );
       map[toI][toJ].character = newCharacter;
-      addChanges(changeTypes.TRANSFORM_CHARACTER, [toI, toJ, newCharacter]);
+      addChanges(Change.transformCharacter(toI, toJ, newCharacter));
     }
   }
 

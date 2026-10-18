@@ -1,5 +1,6 @@
 // game
 import IModule from "./interface/IModule.js";
+import Change from "../Change.js";
 
 // constants
 import changeTypes from "../../constants/changeTypes.js";
@@ -29,7 +30,7 @@ export default class TeleportModule extends IModule {
     map[fromI][fromJ].character = null;
     map[toI][toJ].character = cellData;
 
-    addChanges(changeTypes.MOVE, [fromI, fromJ, toI, toJ]);
+    addChanges(Change.move(fromI, fromJ, toI, toJ));
   }
 
   copy() {

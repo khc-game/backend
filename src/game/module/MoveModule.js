@@ -1,8 +1,6 @@
 // game
 import IModule from "./interface/IModule.js";
-
-// constants
-import changeTypes from "../../constants/changeTypes.js";
+import Change from "../Change.js";
 
 export default class MoveModule extends IModule {
   constructor() {
@@ -14,7 +12,7 @@ export default class MoveModule extends IModule {
     map[fromI][fromJ].character = null;
     map[toI][toJ].character = character;
 
-    addChanges(changeTypes.MOVE, [fromI, fromJ, toI, toJ]);
+    addChanges(Change.move(fromI, fromJ, toI, toJ));
   }
 
   copy() {

@@ -1,9 +1,7 @@
 // game
 import IModule from "./interface/IModule.js";
 import TargetingCalculator from "../TargetingCalculator.js";
-
-// constants
-import changeTypes from "../../constants/changeTypes.js";
+import Change from "../Change.js";
 
 export default class SelfExplosionModule extends IModule {
   constructor(damage) {
@@ -16,7 +14,7 @@ export default class SelfExplosionModule extends IModule {
   }
 
   useLogic(map, player, fromI, fromJ, toI, toJ, addChanges, isFirstPlayer) {
-    addChanges(changeTypes.DEAD, [fromI, fromJ]);
+    addChanges(Change.dead(fromI, fromJ));
     map[fromI][fromJ].character.hp = 0;
 
     const damageCoords = new TargetingCalculator(
@@ -34,7 +32,7 @@ export default class SelfExplosionModule extends IModule {
 
       if (targetCharacter) {
         targetCharacter.damaged(this.damage);
-        addChanges(changeTypes.DAMAGE, [i, j, this.damage]);
+        addChanges(Change.damage(i, j, this.damage));
       }
     }
   }

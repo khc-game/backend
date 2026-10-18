@@ -1,8 +1,6 @@
 // game
 import IModule from "./interface/IModule.js";
-
-// constants
-import changeTypes from "../../constants/changeTypes.js";
+import Change from "../Change.js";
 
 export default class DivideModule extends IModule {
   constructor(cooldown) {
@@ -18,7 +16,7 @@ export default class DivideModule extends IModule {
 
     map[toI][toJ].character = clonedCharacter;
 
-    addChanges(changeTypes.SPAWN_CHARACTER, [toI, toJ, clonedCharacter]);
+    addChanges(Change.spawnCharacter(toI, toJ, clonedCharacter));
   }
 
   copy() {

@@ -1,8 +1,6 @@
-// interface
+// game
 import DefaultCharacter from "./DefaultCharacter.js";
-
-// constants
-import changeTypes from "../../constants/changeTypes.js";
+import Change from "../Change.js";
 
 export default class DancleCharacter extends DefaultCharacter {
   constructor({
@@ -54,19 +52,13 @@ export default class DancleCharacter extends DefaultCharacter {
       this.damaged(damageSize);
       this.maxHP -= damageSize;
 
-      changes.push({
-        changeType: changeTypes.DAMAGE,
-        data: damageSize,
-      });
+      changes.push(Change.damage(charI, charJ, damageSize));
 
       // change modules stack to another
       const modulesStack = this.modulesStack?.shift();
       if (modulesStack) {
         this.modules = modulesStack;
-        changes.push({
-          changeType: changeTypes.MODULES_UPDATE,
-          data: { modules: this.modules, i: charI, j: charJ },
-        });
+        changes.push(Change.modulesUpdate(this.modules, charI, charJ));
       } else {
         this.afterMove = super.afterMove;
       }

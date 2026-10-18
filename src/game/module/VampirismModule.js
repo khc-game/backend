@@ -1,5 +1,6 @@
 // game
 import IModule from "./interface/IModule.js";
+import Change from "../Change.js";
 
 // constants
 import changeTypes from "../../constants/changeTypes.js";
@@ -21,10 +22,10 @@ export default class VampirismModule extends IModule {
     opponent.damaged(this.blood);
     character.heal(bloodForPlayer);
 
-    addChanges(changeTypes.HEAL, [fromI, fromJ, bloodForPlayer]);
-    addChanges(changeTypes.DAMAGE, [toI, toJ, this.blood]);
+    addChanges(Change.heal(fromI, fromJ, bloodForPlayer));
+    addChanges(Change.damage(toI, toJ, this.blood));
     if (opponent.hp <= 0) {
-      addChanges(changeTypes.DEAD, [toI, toJ]);
+      addChanges(Change.dead(toI, toJ));
     }
   }
 

@@ -1,5 +1,6 @@
-// classes
+// game
 import DefaultCharacter from "./DefaultCharacter.js";
+import Change from "../Change.js";
 
 // utils
 import buildCharacterByKey from "../../utils/buildCharacterByKey.js";
@@ -59,13 +60,10 @@ export default class JarCharacter extends DefaultCharacter {
           if (currentShards++ === maxShards) break;
 
           const playerId = this.playerId;
-          const jar_shard = buildCharacterByKey("jar_shard", playerId);
-          const change = {
-            changeType: changeTypes.SPAWN_CHARACTER,
-            data: [nI, nJ, jar_shard],
-          };
+          const JarShardCharacter = buildCharacterByKey("jar_shard", playerId);
+          const change = Change.spawnCharacter(nI, nJ, JarShardCharacter);
 
-          map[nI][nJ].character = jar_shard;
+          map[nI][nJ].character = JarShardCharacter;
           changes.push(change);
         }
       }
