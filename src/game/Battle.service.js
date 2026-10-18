@@ -11,8 +11,8 @@ export default class BattleService {
   static interval = null;
 
   static createRoom(p1, p2, sessionMinutes) {
-    const [p1SocketId, p1Characters] = p1;
-    const [p2SocketId, p2Characters] = p2;
+    const [p1SocketId, _p1Characters, _p1UserData] = p1;
+    const [p2SocketId, _p2Characters, _p2UserData] = p2;
 
     const room = crypto.randomUUID();
 

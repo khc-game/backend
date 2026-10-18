@@ -6,6 +6,7 @@ import Timer from "./Timer.js";
 import buildCharacterByKey from "../utils/buildCharacterByKey.js";
 
 export default class Game {
+  users = null;
   p1 = null;
   p2 = null;
   turn = null;
@@ -17,6 +18,7 @@ export default class Game {
     const p1SocketId = p1[0];
     const p2SocketId = p2[0];
 
+    this.users = { p1: p1[2], p2: p2[2] };
     this.p1 = p1SocketId;
     this.p2 = p2SocketId;
     this.turn = p1SocketId;
@@ -84,6 +86,14 @@ export default class Game {
       map: this.map,
       turn: this.turn,
       players: [this.p1, this.p2],
+      users: {
+        [this.p1]: {
+          username: this.users.p1.username,
+        },
+        [this.p2]: {
+          username: this.users.p2.username,
+        },
+      },
     };
   }
 

@@ -18,6 +18,9 @@ import resignListener from "./sockets/handlers/resign.js";
 import selectModuleListener from "./sockets/handlers/selectModule.js";
 import useModuleListener from "./sockets/handlers/useModule.js";
 
+// utils
+import JWT from "./utils/jwt.js";
+
 // config
 import socketConfig from "./config/socket.js";
 
@@ -38,6 +41,24 @@ app.use((err, req, res, next) => {
 
 const server = http.createServer(app);
 const io = new Server(server, socketConfig);
+
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  if (!token) {
+    return next(new Error("Token is required"));
+  }
+
+  try {
+    const decoded = JWT.verify(token);
+    socket.user = {
+      username: decoded.username,
+      userId: decoded.userId,
+    };
+    next();
+  } catch (error) {
+    next(new Error("Invalid token"));
+  }
+});
 
 io.on("connection", async (socket) => {
   console.log("[connect]", socket.id);

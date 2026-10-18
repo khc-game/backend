@@ -56,18 +56,19 @@ export default async function play(io, socket, selectedPersons) {
   // GAME
 
   if (QueueService.waiting === null) {
-    QueueService.add(socket.id, selectedPersons);
+    QueueService.add(socket.id, selectedPersons, socket.user);
   } else {
     // get enemy
     const enemy = QueueService.waiting;
-    const [enemySocketId, enemyCharacters] = enemy;
+
+    const [enemySocketId, _enemyUserData, _enemyCharacters] = enemy;
     QueueService.waiting = null;
 
     // create room & game
     const sessionMinutes = 10;
     const room = BattleService.createRoom(
       enemy,
-      [socket.id, selectedPersons],
+      [socket.id, selectedPersons, socket.user],
       sessionMinutes,
     );
     const game = BattleService.getGameByRoom(room);
@@ -84,6 +85,9 @@ export default async function play(io, socket, selectedPersons) {
     }
 
     // send map to players
-    io.to(room).emit("play", game.formatForClient());
+    const format = game.formatForClient();
+    console.log(format);
+
+    io.to(room).emit("play", format);
   }
 }
