@@ -346,6 +346,9 @@ export const charactersValues = [
     hp: 10,
     cost: 1,
     modules: [
+      new MoveModule().addPattern(
+        new RadiusPattern(3, new PatternRule().setCharacter(false, true)),
+      ),
       new AttackModule(5)
         .addPattern(
           new RadiusPattern(2, new PatternRule().setCharacter(true, true)),
